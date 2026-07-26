@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knowing what not to answer — Ezequiel Cirilo</title>
+<meta name="description" content="An autonomous agent that audits a brand's website against a criteria library, using two frontier models that must agree, at confidence, before an answer counts.">
+<meta property="og:title" content="Knowing what not to answer">
+<meta property="og:description" content="Two models must agree, at confidence, before an answer counts. Everything uncertain goes to a person.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C03D10'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,500&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: #F7F5F0; color: #211D18; font-family: 'Instrument Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: #C03D10; }
+  a:hover { color: #8F2D0A; }
+  ::selection { background: #C03D10; color: #FFFFFF; }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div id="aaa-root" style="min-height:100vh">
+  <nav aria-label="Primary" style="position:sticky;top:0;z-index:50;background:rgba(24,21,17,0.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(244,241,235,0.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,48px);height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <a href="../index.html" style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:19px;color:#F4F1EB;text-decoration:none;letter-spacing:-0.01em;white-space:nowrap">Ezequiel Cirilo</a>
+      <div style="display:flex;align-items:center;gap:clamp(14px,2.5vw,30px)">
+        <a href="../index.html#case-studies" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#A8A199;text-decoration:none" style-hover="color:#F4F1EB">← All work</a>
+        <a href="mailto:ezequiel.cirilo@gmail.com" style="background:#C03D10;color:#FFFFFF;font-size:13.5px;font-weight:600;padding:10px 18px;border-radius:6px;text-decoration:none;white-space:nowrap" style-hover="background:#8F2D0A">Get in touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <header data-screen-label="Hero" style="background:#181511;color:#F4F1EB;padding:clamp(44px,7vw,78px) clamp(20px,5vw,48px) clamp(52px,8vw,86px)">
+    <div style="max-width:1060px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span aria-hidden="true" style="display:inline-block;width:9px;height:9px;background:#C03D10"></span>
+        <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#E8632C">Case study — AI audit agents</p>
+      </div>
+
+      <h1 style="margin:clamp(26px,3.5vw,38px) 0 0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(36px,6.2vw,72px);line-height:1.04;letter-spacing:-0.025em;max-width:15em;text-wrap:balance">Knowing what not to answer</h1>
+      <p style="margin:clamp(22px,3vw,30px) 0 0;max-width:740px;font-size:clamp(17px,1.5vw,20px);line-height:1.62;color:#B9B2A6;text-wrap:pretty">An autonomous agent that audits a brand's website against a criteria library, using two frontier models that must agree, at confidence, before an answer counts. Where they can't, the work passes to a human. Near-human accuracy in production, at a fraction of the cost.</p>
+
+      <div style="margin-top:clamp(32px,4.5vw,48px);border:1px solid rgba(244,241,235,0.14);border-radius:14px;overflow:hidden;background:#141210">
+        <div style="display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid rgba(244,241,235,0.1);background:rgba(244,241,235,0.03)">
+          <span aria-hidden="true" style="width:9px;height:9px;border-radius:50%;background:rgba(244,241,235,0.18)"></span>
+          <span aria-hidden="true" style="width:9px;height:9px;border-radius:50%;background:rgba(244,241,235,0.18)"></span>
+          <span aria-hidden="true" style="width:9px;height:9px;border-radius:50%;background:rgba(244,241,235,0.18)"></span>
+          <span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#A8A199">Agent capture panel</span>
+        </div>
+        <div style="aspect-ratio:1912/1035;width:100%;background:#0F0E0C">
+          <image-slot id="aaa-hero-copilot" shape="rect" fit="cover" src="../assets/aaa-copilot-panel.png" placeholder="PLACEHOLDER 1 — the agent capture panel: starting-URL field, screenshot budget selector, and the category folders captures are filed into." style="width:100%;height:100%"></image-slot>
+        </div>
+      </div>
+      <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#8D8578;max-width:720px;text-wrap:pretty">One input, the starting URL, and a capture budget that forces the agent to prioritise. The rest it does itself.</p>
+    </div>
+  </header>
+
+  <main style="padding:clamp(56px,8vw,96px) clamp(20px,5vw,48px) clamp(64px,9vw,110px)">
+    <div style="max-width:1060px;margin:0 auto">
+
+      <section data-screen-label="Context" style="max-width:720px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">01</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">Context</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">Auditing is where the platform's data begins. For every brand, an auditor works through a library of 150 to 200 criteria per channel, deciding whether each feature is present on the site and capturing the screenshot evidence that later proves it. It is the heaviest input task on our internal research operations platform — hours of skilled work per assessment. Automating it was the biggest prize available, and the easiest to get wrong.</p>
+      </section>
+
+      <section data-screen-label="The build" style="margin-top:clamp(52px,7vw,84px)">
+        <div style="max-width:720px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">02</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">The build</span>
+            <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+          </div>
+          <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">The agent takes a single input: the starting URL. That choice matters, because multi-line brands run separate landing pages per product, and the entry point decides whether the agent assesses the right one. From there it is autonomous: it crawls the site, maps it, decides which pages are worth capturing, and answers the criteria from what it finds. Two frontier models sit behind those answers, one from Anthropic and one from OpenAI. One navigates, captures, and answers; the other answers from the screenshots alone.</p>
+        </div>
+
+        <figure data-screen-label="Consensus diagram" style="margin:clamp(34px,4.5vw,50px) 0 0">
+          <div role="img" aria-label="The two-model consensus flow. An auditor assigns the agent with a starting URL and a named human co-auditor. The agent crawls, maps and captures within a screenshot budget. Two models then answer: Model A from Anthropic navigates and sees the live site; Model B from OpenAI answers from the screenshots only, the same evidence QA will see. If they agree at confidence, the answer enters the audit. If they do not, or agree only at low confidence, the criterion is left unanswered for the human co-auditor, who answers it and adds evidence. Everything then goes on to QA, with the evidence images carried forward." style="border:1px solid #E7E1D4;border-radius:16px;background:#FFFFFF;padding:clamp(22px,3.4vw,40px);box-sizing:border-box">
+            <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:clamp(22px,3vw,32px)">
+              <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">The consensus flow</p>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:0;align-items:stretch;max-width:860px;margin:0 auto">
+
+              <div style="border:1px solid #E7E1D4;border-radius:12px;background:#FBFAF7;padding:18px 20px;display:flex;flex-direction:column;gap:12px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;color:#6E675D">01</span>
+                <p style="margin:0;font-size:16px;font-weight:600;line-height:1.35;color:#211D18">Auditor assigns the agent</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <span style="border:1px solid #D8D2C6;border-radius:999px;padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#5C5548">Starting URL</span>
+                  <span style="border:1px solid #D8D2C6;border-radius:999px;padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#5C5548">Named human co-auditor</span>
+                </div>
+              </div>
+
+              <span aria-hidden="true" style="align-self:center;width:1px;height:26px;background:#D8D2C6"></span>
+
+              <div style="border:1px solid #E7E1D4;border-radius:12px;background:#FBFAF7;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;color:#6E675D">02</span>
+                <p style="margin:0;font-size:16px;font-weight:600;line-height:1.35;color:#211D18">Agent crawls, maps, and captures</p>
+                <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5C5548">Within a screenshot budget, prioritising the captures it is most confident carry a feature.</p>
+              </div>
+
+              <span aria-hidden="true" style="align-self:center;width:1px;height:26px;background:#D8D2C6"></span>
+
+              <div style="display:grid;grid-template-columns:{{ pairCols }};gap:14px;align-items:stretch">
+                <div style="box-sizing:border-box;min-width:0;border:1px solid #C6BEB0;border-radius:12px;background:#FFFFFF;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;color:#6E675D">03A</span>
+                    <span style="background:#181511;color:#F4F1EB;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:4px 9px;border-radius:4px">Sees the live site</span>
+                  </div>
+                  <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">Model A</p>
+                  <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5C5548">Navigates, captures, and answers from the site itself.</p>
+                </div>
+                <div style="box-sizing:border-box;min-width:0;border:1px solid #C6BEB0;border-radius:12px;background:#FFFFFF;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;color:#6E675D">03B</span>
+                    <span style="border:1px solid #181511;color:#181511;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:3px 8px;border-radius:4px">Screenshots only</span>
+                  </div>
+                  <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">Model B</p>
+                  <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5C5548">Answers from the evidence images alone — what QA will see later.</p>
+                </div>
+              </div>
+
+              <span aria-hidden="true" style="align-self:center;width:1px;height:26px;background:#D8D2C6"></span>
+
+              <div style="align-self:center;border:1px dashed #C6BEB0;border-radius:999px;background:#F7F5F0;padding:13px 26px;display:flex;align-items:center;gap:12px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;color:#6E675D">04</span>
+                <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#211D18">Agree, at confidence?</p>
+              </div>
+
+              <div style="display:grid;grid-template-columns:{{ pairCols }};gap:14px;align-items:stretch;margin-top:22px">
+                <div style="box-sizing:border-box;min-width:0;display:flex;flex-direction:column;gap:8px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#6E675D">↓ Yes</span>
+                  <div style="flex:1;border:1px solid #E7E1D4;border-radius:12px;background:#FBFAF7;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+                    <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">Answer enters the audit</p>
+                    <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5C5548">Consensus at confidence, with its evidence attached.</p>
+                  </div>
+                </div>
+                <div style="box-sizing:border-box;min-width:0;display:flex;flex-direction:column;gap:8px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#C03D10">↓ No, or agreement only at low confidence</span>
+                  <div style="flex:1;border:1px solid #C03D10;border-radius:12px;background:#FDF3EE;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+                    <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">Left unanswered for the human</p>
+                    <p style="margin:0;font-size:13.5px;line-height:1.55;color:#6B4230">The agent publishes nothing it cannot evidence.</p>
+                  </div>
+                </div>
+              </div>
+
+              <span aria-hidden="true" style="align-self:center;width:1px;height:26px;background:#C03D10;margin-top:4px"></span>
+
+              <div style="border:2px solid #C03D10;border-radius:12px;background:#FDF3EE;padding:20px 22px;display:flex;flex-direction:column;gap:10px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#C03D10">05 — Human</span>
+                <p style="margin:0;font-size:17px;font-weight:600;line-height:1.35;color:#211D18">Human co-auditor answers the uncertain criteria and adds evidence</p>
+                <p style="margin:0;font-size:13.5px;line-height:1.55;color:#6B4230">The named co-auditor picks up exactly the criteria the models could not confirm — the thin-evidence cases, by construction.</p>
+              </div>
+
+              <span aria-hidden="true" style="align-self:center;width:1px;height:26px;background:#D8D2C6"></span>
+
+              <div style="align-self:center;border:1px solid #E7E1D4;border-radius:12px;background:#FBFAF7;padding:14px 22px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center">
+                <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">On to QA</p>
+                <p style="margin:0;font-size:13px;line-height:1.5;color:#5C5548">The evidence images carry forward.</p>
+              </div>
+            </div>
+          </div>
+          <figcaption style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#5C5548;max-width:720px;text-wrap:pretty">Two models must agree, at confidence, before an answer counts. One sees the live site, one sees only the evidence QA will get. Everything uncertain goes to a person.</figcaption>
+        </figure>
+      </section>
+
+      <section data-screen-label="The decision that mattered" style="margin-top:clamp(52px,7vw,84px);max-width:720px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">03</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">The decision that mattered</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">When the two models disagreed, the engineering team's first instinct was to publish the answer from whichever model was more confident. We tried it. Accuracy fell, and the team stopped trusting the output. I argued for the opposite: when the models do not reach confident agreement, answer nothing and leave the criterion for the human co-auditor. Consensus had to mean genuine agreement at genuine confidence, not the louder model winning. We traded reach for trust, and the trust is what made the tool usable.</p>
+        <p style="margin:28px 0 0;padding:20px 24px;background:#FDF3EE;border-left:2px solid #C03D10;border-radius:0 8px 8px 0;font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(19px,2.1vw,24px);line-height:1.45;letter-spacing:-0.01em;color:#211D18">We traded reach for trust, and the trust is what made the tool usable.</p>
+        <p style="margin:28px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">There was a second reason the split worked. One model sees the live site; the other sees only the screenshots, the same evidence a human reviews later at QA. When that model cannot confirm a feature from the images, the evidence itself is thin, and that is precisely when a person should look.</p>
+      </section>
+
+      <section data-screen-label="Two product levers" style="margin-top:clamp(56px,8vw,92px);display:grid;grid-template-columns:{{ splitColumns }};gap:clamp(28px,4vw,52px);align-items:start">
+        <div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">04</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">Two product levers</span>
+            <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+          </div>
+          <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">The first agent run captured over a thousand screenshots: tooltips, dropdowns, chat widgets, everything. I introduced a screenshot budget, a cap that forces the agent to prioritise the captures it is most confident carry a feature, trading coverage against storage cost. I also designed a capture-from-URL flow: rather than manually screenshotting and uploading evidence, the auditor pastes a URL and the system captures it, and records where that feature lives so the next run finds it faster. The human makes the agent better every time they use it.</p>
+        </div>
+        <figure style="margin:0">
+          <div style="border:1px solid #E7E1D4;border-radius:12px;overflow:hidden;background:#FFFFFF">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid #EFEAE0">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C5548">Screenshot budget · captures filed</span>
+            </div>
+            <div style="aspect-ratio:465/488;width:100%;background:#F7F5F0">
+              <image-slot id="aaa-capture-from-url" shape="rect" fit="contain" src="../assets/aaa-capture-panel.png" placeholder="PLACEHOLDER 3 — the capture panel after a run: starting URL, the screenshot budget, and the pages captured and filed to category folders." style="width:100%;height:100%"></image-slot>
+            </div>
+          </div>
+          <figcaption style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#5C5548;text-wrap:pretty">The budget caps what the agent may capture; pages mapped beyond it are reported, not silently dropped. Evidence the agent misses, the auditor adds by pasting a URL.</figcaption>
+        </figure>
+      </section>
+
+      <section data-screen-label="Outcome" style="margin-top:clamp(56px,8vw,92px)">
+        <div style="max-width:720px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">05</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">Outcome</span>
+            <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+          </div>
+          <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">In production, the agent's answers were confirmed correct at QA 93% of the time, against a human auditor baseline of 96%: near-human accuracy, at a 63% reduction in audit cost and time. The company kept the savings.</p>
+        </div>
+        <div style="margin-top:clamp(30px,4vw,42px);display:grid;grid-template-columns:{{ statCols }};gap:1px;background:#E2DCCF;border:1px solid #E2DCCF;border-radius:14px;overflow:hidden">
+          <div style="background:#FFFFFF;padding:clamp(22px,3vw,30px)">
+            <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(40px,4.4vw,54px);line-height:1;letter-spacing:-0.03em;color:#C03D10">93%</p>
+            <p style="margin:12px 0 0;font-size:14px;line-height:1.5;color:#5C5548">of agent answers confirmed correct at QA</p>
+          </div>
+          <div style="background:#FFFFFF;padding:clamp(22px,3vw,30px)">
+            <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(40px,4.4vw,54px);line-height:1;letter-spacing:-0.03em;color:#211D18">96%</p>
+            <p style="margin:12px 0 0;font-size:14px;line-height:1.5;color:#5C5548">human auditor baseline — the agent runs at near-human accuracy</p>
+          </div>
+          <div style="background:#FFFFFF;padding:clamp(22px,3vw,30px)">
+            <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(40px,4.4vw,54px);line-height:1;letter-spacing:-0.03em;color:#C03D10">63%</p>
+            <p style="margin:12px 0 0;font-size:14px;line-height:1.5;color:#5C5548">reduction in audit cost and time</p>
+          </div>
+          <div style="background:#FFFFFF;padding:clamp(22px,3vw,30px)">
+            <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(40px,4.4vw,54px);line-height:1;letter-spacing:-0.03em;color:#C03D10">1</p>
+            <p style="margin:12px 0 0;font-size:14px;line-height:1.5;color:#5C5548">input to the agent: the starting URL</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-screen-label="Takeaway" style="margin-top:clamp(56px,8vw,92px);background:#181511;border-radius:16px;padding:clamp(32px,5vw,64px)">
+        <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E8632C">Takeaway</p>
+        <p style="margin:22px 0 0;max-width:880px;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(24px,3.1vw,38px);line-height:1.32;letter-spacing:-0.02em;color:#F4F1EB;text-wrap:pretty">The flagship result did not come from a smarter model. It came from deciding what the system should refuse to answer, and building the human in to catch exactly those cases. Reach is easy. Trust is the product.</p>
+        <div style="margin-top:clamp(30px,4vw,42px);display:flex;flex-wrap:wrap;gap:14px 18px">
+          <a href="mailto:ezequiel.cirilo@gmail.com" style="display:inline-flex;align-items:center;background:#C03D10;color:#FFFFFF;font-size:15.5px;font-weight:600;padding:15px 26px;border-radius:6px;text-decoration:none" style-hover="background:#8F2D0A">Get in touch</a>
+          <a href="../index.html#case-studies" style="display:inline-flex;align-items:center;background:none;border:1px solid rgba(244,241,235,0.28);color:#F4F1EB;font-size:15.5px;font-weight:600;padding:15px 26px;border-radius:6px;text-decoration:none" style-hover="border-color:rgba(244,241,235,0.6)">← Back to all work</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer style="background:#181511;padding:30px clamp(20px,5vw,48px);border-top:1px solid rgba(244,241,235,0.1)">
+    <div style="max-width:1200px;margin:0 auto">
+      <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.04em;color:#A8A199">© 2026 Ezequiel Cirilo</p>
+    </div>
+  </footer>
+  <template id="__bundler_thumbnail" data-bg-color="#181511">
+    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="56" height="56" rx="12" fill="#C03D10"></rect>
+      <circle cx="41" cy="48" r="7" stroke="#FFFFFF" stroke-width="4" fill="none"></circle>
+      <circle cx="55" cy="48" r="7" stroke="#FFFFFF" stroke-width="4" fill="none"></circle>
+    </svg>
+  </template>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { mid: true, wide: true };
+  componentDidMount() {
+    this.mqMid = window.matchMedia('(min-width: 780px)');
+    this.mqWide = window.matchMedia('(min-width: 1080px)');
+    this.sync = () => this.setState({ mid: this.mqMid.matches, wide: this.mqWide.matches });
+    this.mqMid.addEventListener('change', this.sync);
+    this.mqWide.addEventListener('change', this.sync);
+    this.sync();
+  }
+  componentWillUnmount() {
+    this.mqMid.removeEventListener('change', this.sync);
+    this.mqWide.removeEventListener('change', this.sync);
+  }
+  renderVals() {
+    const { mid, wide } = this.state;
+    return {
+      pairCols: mid ? 'repeat(2, minmax(0,1fr))' : 'minmax(0,1fr)',
+      splitColumns: mid ? 'minmax(0,1.15fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+      statCols: wide ? 'repeat(4, minmax(0,1fr))' : (mid ? 'repeat(2, minmax(0,1fr))' : 'minmax(0,1fr)')
+    };
+  }
+}
+
+</script>
+</body>
+</html>

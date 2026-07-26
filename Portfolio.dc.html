@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Ezequiel Cirilo — AI Product Leader</title>
+<meta name="description" content="Ezequiel Cirilo, AI Product Leader. Human-in-the-loop systems where AI suggests, humans decide, and every decision is auditable.">
+<meta property="og:title" content="Ezequiel Cirilo — AI Product Leader">
+<meta property="og:description" content="Human-in-the-loop systems where AI suggests, humans decide, and every decision is auditable.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C03D10'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia,serif' font-size='28' font-weight='600' fill='%23FFFFFF'%3EEC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: #F7F5F0; color: #211D18; font-family: 'Instrument Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: #C03D10; }
+  a:hover { color: #8F2D0A; }
+  ::selection { background: #C03D10; color: #FFFFFF; }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div id="ec-root" style="min-height:100vh">
+  <a href="#main" style="position:fixed;left:16px;top:-64px;z-index:100;background:#181511;color:#F4F1EB;padding:10px 16px;border-radius:6px;font-size:14px;font-weight:600;text-decoration:none;transition:top .15s ease" style-focus="top:12px">Skip to content</a>
+  <nav aria-label="Primary" style="position:sticky;top:0;z-index:50;background:rgba(24,21,17,0.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(244,241,235,0.09)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,48px);height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <a href="#top" style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:19px;color:#F4F1EB;text-decoration:none;letter-spacing:-0.01em;white-space:nowrap">Ezequiel Cirilo</a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;gap:clamp(18px,2.5vw,34px)">
+          <a href="#work" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#A8A199;text-decoration:none;transition:color .15s ease" style-hover="color:#F4F1EB">Work</a>
+          <a href="#case-studies" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#A8A199;text-decoration:none;transition:color .15s ease" style-hover="color:#F4F1EB">Case Studies</a>
+          <a href="#brands" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#A8A199;text-decoration:none;transition:color .15s ease" style-hover="color:#F4F1EB">Brands</a>
+          <a href="#about" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#A8A199;text-decoration:none;transition:color .15s ease" style-hover="color:#F4F1EB">About</a>
+          <a href="mailto:ezequiel.cirilo@gmail.com" style="background:var(--accent,#C03D10);color:#FFFFFF;font-size:13.5px;font-weight:600;padding:10px 18px;border-radius:6px;text-decoration:none;transition:background .15s ease" style-hover="background:color-mix(in oklab, var(--accent,#C03D10) 82%, #000000);color:#FFFFFF">Get in touch</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:10px">
+          <a href="mailto:ezequiel.cirilo@gmail.com" style="background:var(--accent,#C03D10);color:#FFFFFF;font-size:13px;font-weight:600;padding:9px 14px;border-radius:6px;text-decoration:none;white-space:nowrap">Get in touch</a>
+          <button onClick="{{ toggleMenu }}" aria-label="Toggle menu" aria-expanded="{{ menuOpen }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:42px;height:38px;background:none;border:1px solid rgba(244,241,235,0.22);border-radius:6px;cursor:pointer;padding:0">
+            <span style="display:block;width:16px;height:1.5px;background:#F4F1EB"></span>
+            <span style="display:block;width:16px;height:1.5px;background:#F4F1EB"></span>
+          </button>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;top:62px;left:0;right:0;background:#181511;border-bottom:1px solid rgba(244,241,235,0.12);padding:8px clamp(20px,5vw,48px) 20px;display:flex;flex-direction:column">
+        <a href="#work" onClick="{{ closeMenu }}" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#F4F1EB;text-decoration:none;padding:15px 0;border-bottom:1px solid rgba(244,241,235,0.08)">Work</a>
+        <a href="#case-studies" onClick="{{ closeMenu }}" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#F4F1EB;text-decoration:none;padding:15px 0;border-bottom:1px solid rgba(244,241,235,0.08)">Case Studies</a>
+        <a href="#brands" onClick="{{ closeMenu }}" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#F4F1EB;text-decoration:none;padding:15px 0;border-bottom:1px solid rgba(244,241,235,0.08)">Brands</a>
+        <a href="#about" onClick="{{ closeMenu }}" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#F4F1EB;text-decoration:none;padding:15px 0">About</a>
+      </div>
+    </sc-if>
+  </nav>
+  <header id="top" data-screen-label="Hero" style="background-color:#181511;background-image:repeating-linear-gradient(to right, rgba(244,241,235,0.035) 0, rgba(244,241,235,0.035) 1px, transparent 1px, transparent 96px),repeating-linear-gradient(to bottom, rgba(244,241,235,0.028) 0, rgba(244,241,235,0.028) 1px, transparent 1px, transparent 96px);color:#F4F1EB;padding:0 clamp(20px,5vw,48px);min-height:calc(100svh - 62px);display:flex;align-items:center">
+    <div style="max-width:1200px;width:100%;margin:0 auto;padding:clamp(72px,11vh,130px) 0 clamp(64px,10vh,110px)">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <span aria-hidden="true" style="display:inline-block;width:9px;height:9px;background:var(--accent,#C03D10)"></span>
+        <h1 style="margin:0;font-size:17px;font-weight:600;letter-spacing:0.01em;color:#F4F1EB">Ezequiel Cirilo</h1>
+        <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-bright,#E8632C)">AI Product Leader</p>
+      </div>
+      <p style="margin:clamp(28px,4vw,42px) 0 0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(38px,7.3vw,94px);line-height:1.03;letter-spacing:-0.025em;max-width:11.2em;text-wrap:balance">I build AI products people <em style="text-decoration:underline;text-decoration-color:var(--accent,#C03D10);text-decoration-thickness:0.055em;text-underline-offset:0.09em">actually trust</em> <span style="white-space:nowrap">in production.</span></p>
+      <p style="margin:clamp(28px,3.5vw,38px) 0 0;max-width:660px;font-size:clamp(16.5px,1.35vw,19px);line-height:1.68;color:#B9B2A6">Human-in-the-loop systems where AI suggests, humans decide, and every decision is auditable. Most recently Head of Product Enablement &amp; Delivery at Global Reviews, leading AI product development across a research and competitive intelligence SaaS platform.</p>
+      <div style="margin-top:clamp(34px,4.5vw,48px);display:flex;align-items:center;flex-wrap:wrap;gap:14px 18px">
+        <a href="#work" style="display:inline-flex;align-items:center;gap:10px;background:var(--accent,#C03D10);color:#FFFFFF;font-size:15.5px;font-weight:600;padding:15px 26px;border-radius:6px;text-decoration:none;transition:background .15s ease" style-hover="background:color-mix(in oklab, var(--accent,#C03D10) 82%, #000000);color:#FFFFFF">See my work<span aria-hidden="true" style="font-size:17px;line-height:1">→</span></a>
+        <a href="mailto:ezequiel.cirilo@gmail.com" style="display:inline-flex;align-items:center;background:none;border:1px solid rgba(244,241,235,0.28);color:#F4F1EB;font-size:15.5px;font-weight:600;padding:14px 25px;border-radius:6px;text-decoration:none;transition:border-color .15s ease, background .15s ease" style-hover="border-color:rgba(244,241,235,0.6);background:rgba(244,241,235,0.05);color:#F4F1EB">Get in touch</a>
+        <a href="assets/Ezequiel_Cirilo_CV.pdf" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.06em;color:#A8A199;text-decoration:underline;text-underline-offset:4px;transition:color .15s ease" style-hover="color:#F4F1EB">Download CV ↓</a>
+      </div>
+    </div>
+  </header>
+  <main id="main">
+    <section data-screen-label="Thesis" style="padding:clamp(76px,10vw,132px) clamp(20px,5vw,48px);scroll-margin-top:70px">
+      <div style="max-width:1200px;margin:0 auto">
+        <div style="display:flex;align-items:center;gap:18px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;color:var(--accent,#C03D10)">01</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <h2 style="margin:20px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-0.015em">Why human-in-the-loop</h2>
+        <p style="margin:clamp(28px,3.5vw,40px) 0 0;max-width:880px;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(20px,2.2vw,26px);line-height:1.55;letter-spacing:-0.005em;color:#2A251E;text-wrap:pretty">Most AI products fail at the trust layer, not the model layer. An AI suggestion that is only 50% accurate can still transform a workflow, if the review experience lets humans confirm, correct, and override it quickly, and every dismissal is logged. That is the pattern behind everything I have built: audit automation, video redaction curation, duplicate detection, respondent quality monitoring.</p>
+        <p style="margin:clamp(20px,2.5vw,28px) 0 0;max-width:880px;font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(22px,2.5vw,29px);line-height:1.4;letter-spacing:-0.005em;color:#211D18">AI does the volume. Humans own the judgement.</p>
+        <div role="img" aria-label="The loop: AI suggests; a human confirms, corrects, or overrides; every decision is logged; the system improves and feeds back into the next suggestion." style="margin:clamp(36px,5vw,56px) 0 0">
+          <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+            <div style="position:relative;padding-left:26px;padding-bottom:46px">
+              <div style="display:flex;align-items:stretch;flex-wrap:wrap;gap:6px">
+                <div style="box-sizing:border-box;min-width:0;flex:{{ loopCardFlex }};background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.16em;color:#C03D10">01</span>
+                  <div style="display:flex;align-items:flex-start;gap:14px">
+                    <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#FBEAE1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l1.7 4.6L18 10.3l-4.3 1.7L12 16.6l-1.7-4.6L6 10.3l4.3-1.7z"></path><path d="M18.2 15.4l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"></path></svg></span>
+                    <div style="min-width:0">
+                      <p style="margin:0;font-size:16px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;color:#211D18;text-wrap:pretty">AI suggests</p>
+                      <p style="margin:7px 0 0;font-size:13.5px;line-height:1.55;color:#5C5549;text-wrap:pretty">AI scans and proposes likely outcomes at scale.</p>
+                    </div>
+                  </div>
+                </div>
+                <span aria-hidden="true" style="flex:0 0 auto;align-self:center;align-items:center;justify-content:center;width:30px;color:#C6835F;display:{{ loopArrow }}"><svg viewBox="0 0 24 12" width="26" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6h20"></path><path d="M16.5 1.5L21 6l-4.5 4.5"></path></svg></span>
+                <div style="box-sizing:border-box;min-width:0;flex:{{ loopCardFlex }};background:#FDF3EE;border:2px solid #C03D10;border-radius:12px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.16em;color:#C03D10">02</span>
+                  <div style="display:flex;align-items:flex-start;gap:14px">
+                    <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#C03D10;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="3.1"></circle><path d="M5.8 19.2c0-3.2 2.8-5.3 6.2-5.3s6.2 2.1 6.2 5.3"></path></svg></span>
+                    <div style="min-width:0">
+                      <p style="margin:0;font-size:16px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;color:#211D18;text-wrap:pretty">Human confirms, corrects, or overrides</p>
+                      <p style="margin:7px 0 0;font-size:13.5px;line-height:1.55;color:#5C5549;text-wrap:pretty">Humans review with speed and context. They make the call.</p>
+                    </div>
+                  </div>
+                </div>
+                <span aria-hidden="true" style="flex:0 0 auto;align-self:center;align-items:center;justify-content:center;width:30px;color:#C6835F;display:{{ loopArrow }}"><svg viewBox="0 0 24 12" width="26" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6h20"></path><path d="M16.5 1.5L21 6l-4.5 4.5"></path></svg></span>
+                <div style="box-sizing:border-box;min-width:0;flex:{{ loopCardFlex }};background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.16em;color:#C03D10">03</span>
+                  <div style="display:flex;align-items:flex-start;gap:14px">
+                    <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#FBEAE1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="4.5" width="13" height="15" rx="2.2"></rect><path d="M9.5 4.5V3.4h5v1.1"></path><path d="M9 10h6M9 13.5h6M9 17h3.5"></path></svg></span>
+                    <div style="min-width:0">
+                      <p style="margin:0;font-size:16px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;color:#211D18;text-wrap:pretty">Every decision is logged</p>
+                      <p style="margin:7px 0 0;font-size:13.5px;line-height:1.55;color:#5C5549;text-wrap:pretty">Each action is captured for transparency and traceability.</p>
+                    </div>
+                  </div>
+                </div>
+                <span aria-hidden="true" style="flex:0 0 auto;align-self:center;align-items:center;justify-content:center;width:30px;color:#C6835F;display:{{ loopArrow }}"><svg viewBox="0 0 24 12" width="26" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6h20"></path><path d="M16.5 1.5L21 6l-4.5 4.5"></path></svg></span>
+                <div style="box-sizing:border-box;min-width:0;flex:{{ loopCardFlex }};background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.16em;color:#C03D10">04</span>
+                  <div style="display:flex;align-items:flex-start;gap:14px">
+                    <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#FBEAE1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5l4.7-4.7 3.2 3.2 6.6-6.6"></path><path d="M14.6 8.4h4.4v4.4"></path></svg></span>
+                    <div style="min-width:0">
+                      <p style="margin:0;font-size:16px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;color:#211D18;text-wrap:pretty">The system improves</p>
+                      <p style="margin:7px 0 0;font-size:13.5px;line-height:1.55;color:#5C5549;text-wrap:pretty">Feedback powers better suggestions over time.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div aria-hidden="true" style="position:absolute;left:52px;right:26px;bottom:12px;height:32px;border:1.5px dashed #E09A78;border-top:none;border-radius:0 0 14px 14px;pointer-events:none">
+                <span style="position:absolute;left:-4.5px;top:-8px;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid #C03D10"></span>
+                <span style="position:absolute;left:50%;bottom:0;transform:translate(-50%,50%);background:#C03D10;color:#FFFFFF;padding:5px 16px;border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;white-space:nowrap">Feedback loop</span>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:8px">
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+                <div style="box-sizing:border-box;min-width:0;flex:{{ loopCardFlex }};background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.16em;color:#C03D10">01</span>
+                  <div style="display:flex;align-items:flex-start;gap:14px">
+                    <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#FBEAE1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l1.7 4.6L18 10.3l-4.3 1.7L12 16.6l-1.7-4.6L6 10.3l4.3-1.7z"></path><path d="M18.2 15.4l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"></path></svg></span>
+                    <div style="min-width:0">
+                      <p style="margin:0;font-size:16px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;color:#211D18;text-wrap:pretty">AI suggests</p>
+                      <p style="margin:7px 0 0;font-size:13.5px;line-height:1.55;color:#5C5549;text-wrap:pretty">AI scans and proposes likely outcomes at scale.</p>
+                    </div>
+                  </div>
+                </div>
+                <span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#A39B8C;font-size:17px;line-height:1;height:20px;width:100%">↓</span>
+                <div style="box-sizing:border-box;min-width:0;flex:{{ loopCardFlex }};background:#FDF3EE;border:2px solid #C03D10;border-radius:12px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.16em;color:#C03D10">02</span>
+                  <div style="display:flex;align-items:flex-start;gap:14px">
+                    <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#C03D10;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="3.1"></circle><path d="M5.8 19.2c0-3.2 2.8-5.3 6.2-5.3s6.2 2.1 6.2 5.3"></path></svg></span>
+                    <div style="min-width:0">
+                      <p style="margin:0;font-size:16px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;color:#211D18;text-wrap:pretty">Human confirms, corrects, or overrides</p>
+                      <p style="margin:7px 0 0;font-size:13.5px;line-height:1.55;color:#5C5549;text-wrap:pretty">Humans review with speed and context. They make the call.</p>
+                    </div>
+                  </div>
+                </div>
+                <span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#A39B8C;font-size:17px;line-height:1;height:20px;width:100%">↓</span>
+                <div style="box-sizing:border-box;min-width:0;flex:{{ loopCardFlex }};background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.16em;color:#C03D10">03</span>
+                  <div style="display:flex;align-items:flex-start;gap:14px">
+                    <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#FBEAE1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="4.5" width="13" height="15" rx="2.2"></rect><path d="M9.5 4.5V3.4h5v1.1"></path><path d="M9 10h6M9 13.5h6M9 17h3.5"></path></svg></span>
+                    <div style="min-width:0">
+                      <p style="margin:0;font-size:16px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;color:#211D18;text-wrap:pretty">Every decision is logged</p>
+                      <p style="margin:7px 0 0;font-size:13.5px;line-height:1.55;color:#5C5549;text-wrap:pretty">Each action is captured for transparency and traceability.</p>
+                    </div>
+                  </div>
+                </div>
+                <span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#A39B8C;font-size:17px;line-height:1;height:20px;width:100%">↓</span>
+                <div style="box-sizing:border-box;min-width:0;flex:{{ loopCardFlex }};background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.16em;color:#C03D10">04</span>
+                  <div style="display:flex;align-items:flex-start;gap:14px">
+                    <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#FBEAE1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5l4.7-4.7 3.2 3.2 6.6-6.6"></path><path d="M14.6 8.4h4.4v4.4"></path></svg></span>
+                    <div style="min-width:0">
+                      <p style="margin:0;font-size:16px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;color:#211D18;text-wrap:pretty">The system improves</p>
+                      <p style="margin:7px 0 0;font-size:13.5px;line-height:1.55;color:#5C5549;text-wrap:pretty">Feedback powers better suggestions over time.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div aria-hidden="true" style="flex:0 0 auto;width:26px;margin:44px 0 44px;border:1.5px dashed #E09A78;border-left:none;border-radius:0 14px 14px 0;position:relative">
+                <span style="position:absolute;left:-5px;top:-9px;font-size:12px;line-height:1;color:#C03D10">◀</span>
+                <span style="position:absolute;top:50%;right:-1px;transform:translate(50%,-50%);writing-mode:vertical-rl;background:#C03D10;color:#FFFFFF;padding:14px 5px;border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;white-space:nowrap">Feedback loop</span>
+              </div>
+            </div>
+          </sc-if>
+          <div style="margin-top:clamp(22px,3vw,30px);background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:22px clamp(8px,1.5vw,14px);display:flex;flex-wrap:wrap;gap:20px 0">
+            <div style="box-sizing:border-box;flex:1 1 190px;min-width:0;padding:0 clamp(14px,1.6vw,22px);border-right:1px solid #EAE4D8;display:flex;align-items:flex-start;gap:12px">
+                <span aria-hidden="true" style="flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:#F3EEE6;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l6.5 2.4v5.4c0 3.7-2.7 6.3-6.5 7.8-3.8-1.5-6.5-4.1-6.5-7.8V5.9z"></path></svg></span>
+                <div style="min-width:0">
+                  <p style="margin:0;font-size:14.5px;font-weight:600;letter-spacing:-0.005em;color:#211D18;text-wrap:pretty">Trust by design</p>
+                  <p style="margin:5px 0 0;font-size:13px;line-height:1.5;color:#5C5549;text-wrap:pretty">Humans stay in control at every critical step.</p>
+                </div>
+              </div>
+            <div style="box-sizing:border-box;flex:1 1 190px;min-width:0;padding:0 clamp(14px,1.6vw,22px);border-right:1px solid #EAE4D8;display:flex;align-items:flex-start;gap:12px">
+                <span aria-hidden="true" style="flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:#F3EEE6;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7.5"></circle><circle cx="12" cy="12" r="3.4"></circle><circle cx="12" cy="12" r="0.6" fill="#C03D10"></circle></svg></span>
+                <div style="min-width:0">
+                  <p style="margin:0;font-size:14.5px;font-weight:600;letter-spacing:-0.005em;color:#211D18;text-wrap:pretty">Better decisions</p>
+                  <p style="margin:5px 0 0;font-size:13px;line-height:1.5;color:#5C5549;text-wrap:pretty">Context, nuance and judgement drive accuracy.</p>
+                </div>
+              </div>
+            <div style="box-sizing:border-box;flex:1 1 190px;min-width:0;padding:0 clamp(14px,1.6vw,22px);border-right:1px solid #EAE4D8;display:flex;align-items:flex-start;gap:12px">
+                <span aria-hidden="true" style="flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:#F3EEE6;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6.8" rx="6.5" ry="2.6"></ellipse><path d="M5.5 6.8v10.4c0 1.4 2.9 2.6 6.5 2.6s6.5-1.2 6.5-2.6V6.8"></path><path d="M5.5 12c0 1.4 2.9 2.6 6.5 2.6s6.5-1.2 6.5-2.6"></path></svg></span>
+                <div style="min-width:0">
+                  <p style="margin:0;font-size:14.5px;font-weight:600;letter-spacing:-0.005em;color:#211D18;text-wrap:pretty">Data that compounds</p>
+                  <p style="margin:5px 0 0;font-size:13px;line-height:1.5;color:#5C5549;text-wrap:pretty">High-quality feedback creates compounding improvements.</p>
+                </div>
+              </div>
+            <div style="box-sizing:border-box;flex:1 1 190px;min-width:0;padding:0 clamp(14px,1.6vw,22px);display:flex;align-items:flex-start;gap:12px">
+                <span aria-hidden="true" style="flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:#F3EEE6;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C03D10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 19.5h13"></path><path d="M8.5 19.5v-5M12 19.5V8.5M15.5 19.5v-8"></path></svg></span>
+                <div style="min-width:0">
+                  <p style="margin:0;font-size:14.5px;font-weight:600;letter-spacing:-0.005em;color:#211D18;text-wrap:pretty">Continuous improvement</p>
+                  <p style="margin:5px 0 0;font-size:13px;line-height:1.5;color:#5C5549;text-wrap:pretty">Each decision makes the system smarter.</p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="work" data-screen-label="What I've Built" style="padding:0 clamp(20px,5vw,48px) clamp(76px,10vw,132px);scroll-margin-top:70px">
+      <div style="max-width:1200px;margin:0 auto">
+        <div style="display:flex;align-items:center;gap:18px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;color:var(--accent,#C03D10)">02</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <h2 style="margin:20px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-0.015em">What I've built</h2>
+        <div style="margin-top:clamp(32px,4vw,46px);display:grid;gap:16px;grid-template-columns:repeat(auto-fit, minmax(min(100%, 330px), 1fr))">
+          <div style="background:#FFFFFF;border:1px solid #E7E1D4;border-radius:10px;padding:26px 26px 30px;display:flex;flex-direction:column;gap:12px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease" style-hover="transform:translateY(-3px);border-color:#D8D0BE;box-shadow:0 14px 30px rgba(30,25,18,0.08)">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:0.16em;color:#6E675D">01</span>
+            <h3 style="margin:0;font-size:18.5px;font-weight:600;letter-spacing:-0.005em">AI audit agents</h3>
+            <p style="margin:0;font-size:15px;line-height:1.64;color:#6E675D;text-wrap:pretty">Led the integration of an agentic, multi-model LLM system automating website feature audits: 93% of AI assessments confirmed correct at QA, 63% reduction in audit costs and manual assessment time.</p>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E7E1D4;border-radius:10px;padding:26px 26px 30px;display:flex;flex-direction:column;gap:12px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease" style-hover="transform:translateY(-3px);border-color:#D8D0BE;box-shadow:0 14px 30px rgba(30,25,18,0.08)">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:0.16em;color:#6E675D">02</span>
+            <h3 style="margin:0;font-size:18.5px;font-weight:600;letter-spacing:-0.005em">AI QA Copilot</h3>
+            <p style="margin:0;font-size:15px;line-height:1.64;color:#6E675D;text-wrap:pretty">Shipped a QA copilot combining LLM reasoning, image analysis, and human-in-the-loop review: QA cycle time cut 69%, QA costs cut 61%, 87% of AI suggestions approved without correction.</p>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E7E1D4;border-radius:10px;padding:26px 26px 30px;display:flex;flex-direction:column;gap:12px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease" style-hover="transform:translateY(-3px);border-color:#D8D0BE;box-shadow:0 14px 30px rgba(30,25,18,0.08)">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:0.16em;color:#6E675D">03</span>
+            <h3 style="margin:0;font-size:18.5px;font-weight:600;letter-spacing:-0.005em">Respondent quality monitoring</h3>
+            <p style="margin:0;font-size:15px;line-height:1.64;color:#6E675D;text-wrap:pretty">Led 0-to-1 delivery of an AI module screening study data for non-genuine responses, with inline evidence and human review of every exclusion.</p>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E7E1D4;border-radius:10px;padding:26px 26px 30px;display:flex;flex-direction:column;gap:12px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease" style-hover="transform:translateY(-3px);border-color:#D8D0BE;box-shadow:0 14px 30px rgba(30,25,18,0.08)">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:0.16em;color:#6E675D">04</span>
+            <h3 style="margin:0;font-size:18.5px;font-weight:600;letter-spacing:-0.005em">Video intelligence</h3>
+            <p style="margin:0;font-size:15px;line-height:1.64;color:#6E675D;text-wrap:pretty">Launched a searchable video insight platform linking moderated interview clips to hard UX metrics (satisfaction, ease, confidence, success). Product teams filter real user footage by KPI, journey, and demographic, turning hours of interviews into fast, evidence-backed decisions.</p>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E7E1D4;border-radius:10px;padding:26px 26px 30px;display:flex;flex-direction:column;gap:12px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease" style-hover="transform:translateY(-3px);border-color:#D8D0BE;box-shadow:0 14px 30px rgba(30,25,18,0.08)">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:0.16em;color:#6E675D">05</span>
+            <h3 style="margin:0;font-size:18.5px;font-weight:600;letter-spacing:-0.005em">PII redaction at scale</h3>
+            <p style="margin:0;font-size:15px;line-height:1.64;color:#6E675D;text-wrap:pretty">Designed an AI-assisted redaction workflow that surfaces PII across thousands of recorded research sessions for human sign-off, making session video GDPR-safe to share and analyse.</p>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E7E1D4;border-radius:10px;padding:26px 26px 30px;display:flex;flex-direction:column;gap:12px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease" style-hover="transform:translateY(-3px);border-color:#D8D0BE;box-shadow:0 14px 30px rgba(30,25,18,0.08)">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:0.16em;color:#6E675D">06</span>
+            <h3 style="margin:0;font-size:18.5px;font-weight:600;letter-spacing:-0.005em">Competitor intelligence library</h3>
+            <p style="margin:0;font-size:15px;line-height:1.64;color:#6E675D;text-wrap:pretty">Shipped a searchable library of real UI examples captured across brands, industries, and markets, each linked to usability performance scores. Product teams use it to see which features matter, who executes them best, and exactly how.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="case-studies" data-screen-label="Case Studies" style="background:#181511;color:#F4F1EB;padding:clamp(76px,10vw,132px) clamp(20px,5vw,48px);scroll-margin-top:70px">
+      <div style="max-width:1200px;margin:0 auto">
+        <div style="display:flex;align-items:center;gap:18px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;color:var(--accent-bright,#E8632C)">03</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:rgba(244,241,235,0.14)"></span>
+        </div>
+        <h2 style="margin:20px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-0.015em">Case studies</h2>
+        <div style="margin-top:clamp(32px,4vw,46px);display:grid;gap:16px;grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr))">
+          <article style="position:relative;background:#221E18;border:1px solid rgba(244,241,235,0.1);border-radius:10px;padding:30px 28px;display:flex;flex-direction:column;transition:border-color .18s ease;cursor:pointer" style-hover="border-color:#C03D10">
+            <div aria-hidden="true" style="height:165px;margin-bottom:22px;background:#181511;border:1px solid rgba(244,241,235,0.08);border-radius:8px;padding:13px;display:flex;flex-direction:column;gap:8px;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:8px;padding-bottom:3px">
+                <span style="width:8px;height:8px;border-radius:50%;background:#C03D10"></span>
+                <span style="height:6px;width:54%;border-radius:3px;background:rgba(244,241,235,0.22)"></span>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px"><span style="flex:0 0 auto;width:14px;height:14px;border-radius:4px;background:#C03D10;display:flex;align-items:center;justify-content:center;font-size:9px;line-height:1;font-weight:700;color:#181511">✓</span><span style="height:6px;width:68%;border-radius:3px;background:rgba(244,241,235,0.16)"></span></div>
+              <div style="display:flex;align-items:center;gap:9px"><span style="flex:0 0 auto;width:14px;height:14px;border-radius:4px;background:#C03D10;display:flex;align-items:center;justify-content:center;font-size:9px;line-height:1;font-weight:700;color:#181511">✓</span><span style="height:6px;width:52%;border-radius:3px;background:rgba(244,241,235,0.16)"></span></div>
+              <div style="border:1px solid #C03D10;border-radius:6px;padding:6px 9px;display:flex;align-items:center;gap:9px;background:rgba(192,61,16,0.1)">
+                <span style="flex:0 0 auto;width:14px;height:14px;border-radius:4px;border:1.5px solid #C03D10"></span>
+                <span style="height:6px;width:58%;border-radius:3px;background:rgba(244,241,235,0.3)"></span>
+                <span style="margin-left:auto;height:6px;width:22px;border-radius:3px;background:#C03D10"></span>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px"><span style="flex:0 0 auto;width:14px;height:14px;border-radius:4px;border:1px solid rgba(244,241,235,0.2)"></span><span style="height:6px;width:62%;border-radius:3px;background:rgba(244,241,235,0.12)"></span></div>
+              <div style="display:flex;align-items:center;gap:9px"><span style="flex:0 0 auto;width:14px;height:14px;border-radius:4px;border:1px solid rgba(244,241,235,0.2)"></span><span style="height:6px;width:46%;border-radius:3px;background:rgba(244,241,235,0.12)"></span></div></div>
+            <h3 style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(22px,2vw,26px);letter-spacing:-0.01em;line-height:1.15;color:#F4F1EB">AI Audit Agents</h3>
+            <p style="margin:14px 0 0;font-size:15px;line-height:1.68;color:#A8A199;text-wrap:pretty">Automating the audit itself, at <strong style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#E8632C">93%</strong> accuracy. Led the integration of an agentic, multi-model LLM system that assesses websites against structured criteria libraries, cutting audit cost and manual effort <strong style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#E8632C">63%</strong> while every result stays confirmable by a human.</p>
+            <div style="margin-top:auto;padding-top:26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                <a href="case-studies/ai-audit-agents.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;color:#E8632C;text-decoration:none" style-hover="text-decoration:underline;color:#E8632C" style-after="content:'';position:absolute;inset:0;border-radius:10px">Read case study<span aria-hidden="true" style="font-size:15px;line-height:1">→</span></a>
+              </div>
+          </article>
+          <article style="position:relative;background:#221E18;border:1px solid rgba(244,241,235,0.1);border-radius:10px;padding:30px 28px;display:flex;flex-direction:column;transition:border-color .18s ease;cursor:pointer" style-hover="border-color:#C03D10">
+            <div aria-hidden="true" style="height:165px;margin-bottom:22px;background:#181511;border:1px solid rgba(244,241,235,0.08);border-radius:8px;padding:13px;display:flex;flex-direction:column;gap:8px;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="width:16px;height:16px;border-radius:5px;border:1px solid #C03D10;background:rgba(192,61,16,0.12);display:flex;align-items:center;justify-content:center"><span style="width:6px;height:6px;border-radius:2px;background:#C03D10"></span></span>
+                <span style="height:6px;width:42%;border-radius:3px;background:rgba(244,241,235,0.26)"></span>
+              </div>
+              <span style="height:6px;width:86%;border-radius:3px;background:rgba(244,241,235,0.13)"></span>
+              <span style="height:6px;width:70%;border-radius:3px;background:rgba(244,241,235,0.13)"></span>
+              <div style="display:flex;gap:8px;margin-top:3px">
+                <span style="display:flex;align-items:center;justify-content:center;gap:5px;height:22px;flex:1.25;border-radius:5px;background:#C03D10"><span style="font-size:10px;line-height:1;font-weight:700;color:#181511">✓</span><span style="height:5px;width:34px;max-width:50%;border-radius:3px;background:rgba(24,21,17,0.55)"></span></span>
+                <span style="display:flex;align-items:center;justify-content:center;height:22px;flex:1;border-radius:5px;border:1px solid rgba(244,241,235,0.25)"><span style="height:5px;width:30px;max-width:55%;border-radius:3px;background:rgba(244,241,235,0.3)"></span></span>
+                <span style="display:flex;align-items:center;justify-content:center;height:22px;flex:1;border-radius:5px;border:1px solid rgba(244,241,235,0.25)"><span style="height:5px;width:30px;max-width:55%;border-radius:3px;background:rgba(244,241,235,0.3)"></span></span>
+              </div>
+              <div style="margin-top:auto;border-top:1px solid rgba(244,241,235,0.1);padding-top:9px;display:flex;align-items:center;gap:8px">
+                <span style="width:6px;height:6px;border-radius:50%;background:#C03D10;opacity:0.7"></span>
+                <span style="height:5px;width:56%;border-radius:3px;background:rgba(244,241,235,0.13)"></span>
+                <span style="margin-left:auto;height:5px;width:13%;border-radius:3px;background:rgba(244,241,235,0.13)"></span>
+              </div>
+            </div>
+            <h3 style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(22px,2vw,26px);letter-spacing:-0.01em;line-height:1.15;color:#F4F1EB">AI-Assisted Quality Assurance</h3>
+            <p style="margin:14px 0 0;font-size:15px;line-height:1.68;color:#A8A199;text-wrap:pretty"><strong style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#E8632C">87%</strong> of AI suggestions approved without correction, at a fraction of the original cost. How rescoping the AI, not retraining it, turned an expensive, unreliable assistant into a copilot Quality Analysts trust across 3,000 criteria decisions per study.</p>
+            <div style="margin-top:auto;padding-top:26px">
+                <a href="case-studies/ai-qa.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;color:#E8632C;text-decoration:none" style-hover="text-decoration:underline;color:#E8632C" style-after="content:'';position:absolute;inset:0;border-radius:10px">Read case study<span aria-hidden="true" style="font-size:15px;line-height:1">→</span></a>
+              </div>
+          </article>
+          <article style="position:relative;background:#221E18;border:1px solid rgba(244,241,235,0.1);border-radius:10px;padding:30px 28px;display:flex;flex-direction:column;transition:border-color .18s ease;cursor:pointer" style-hover="border-color:#C03D10">
+            <div aria-hidden="true" style="height:165px;margin-bottom:22px;background:#181511;border:1px solid rgba(244,241,235,0.08);border-radius:8px;padding:13px;display:flex;flex-direction:column;gap:8px;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:8px;padding-bottom:3px">
+                <span style="width:8px;height:8px;border-radius:50%;background:#C03D10"></span>
+                <span style="height:6px;width:48%;border-radius:3px;background:rgba(244,241,235,0.22)"></span>
+              </div>
+              <div style="border:1px solid rgba(244,241,235,0.12);border-radius:6px;padding:6px 9px;display:flex;align-items:center;gap:9px"><span style="height:6px;width:40%;border-radius:3px;background:rgba(244,241,235,0.14)"></span><span style="margin-left:auto;height:6px;width:26px;border-radius:3px;background:rgba(244,241,235,0.14)"></span></div>
+              <div style="border:1px solid #C03D10;border-radius:6px;padding:6px 9px;display:flex;align-items:center;gap:9px;background:rgba(192,61,16,0.1)">
+                <span style="flex:0 0 auto;width:13px;height:13px;border-radius:50%;border:1.5px solid #C03D10;display:flex;align-items:center;justify-content:center;font-size:9px;line-height:1;font-weight:700;color:#C03D10">!</span>
+                <span style="height:6px;width:34%;border-radius:3px;background:rgba(244,241,235,0.3)"></span>
+                <span style="margin-left:auto;display:flex;align-items:center;justify-content:center;height:18px;width:46px;border-radius:5px;background:#C03D10"><span style="height:5px;width:24px;border-radius:3px;background:rgba(24,21,17,0.55)"></span></span>
+              </div>
+              <div style="border:1px solid rgba(244,241,235,0.12);border-radius:6px;padding:6px 9px;display:flex;align-items:center;gap:9px"><span style="height:6px;width:44%;border-radius:3px;background:rgba(244,241,235,0.14)"></span><span style="margin-left:auto;height:6px;width:26px;border-radius:3px;background:rgba(244,241,235,0.14)"></span></div>
+              <div style="margin-top:auto;border-top:1px solid rgba(244,241,235,0.1);padding-top:8px;display:flex;align-items:center;gap:8px"><span style="height:6px;width:50%;border-radius:3px;background:rgba(244,241,235,0.12)"></span><span style="margin-left:auto;height:5px;width:14%;border-radius:3px;background:rgba(244,241,235,0.12)"></span></div></div>
+            <h3 style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(22px,2vw,26px);letter-spacing:-0.01em;line-height:1.15;color:#F4F1EB">Research Data Integrity</h3>
+            <p style="margin:14px 0 0;font-size:15px;line-height:1.68;color:#A8A199;text-wrap:pretty">Keeping fraudulent respondents out of research data. Led 0-to-1 delivery of an AI module that screens daily study exports, flags non-genuine responses with inline evidence, and generates exclusion lists, with a human reviewing every exclusion before it stands.</p>
+            <div style="margin-top:auto;padding-top:26px">
+                <a href="case-studies/research-data-integrity.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;color:#E8632C;text-decoration:none" style-hover="text-decoration:underline;color:#E8632C" style-after="content:'';position:absolute;inset:0;border-radius:10px">Read case study<span aria-hidden="true" style="font-size:15px;line-height:1">→</span></a>
+              </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="brands" data-screen-label="Brands & Industries" style="padding:clamp(76px,10vw,132px) clamp(20px,5vw,48px);scroll-margin-top:70px">
+      <div style="max-width:1200px;margin:0 auto">
+        <div style="display:flex;align-items:center;gap:18px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;color:var(--accent,#C03D10)">04</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <h2 style="margin:20px 0 0;max-width:640px;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);line-height:1.12;letter-spacing:-0.015em;text-wrap:balance">Brands that made decisions with insights from my platforms</h2>
+        <div style="margin-top:clamp(28px,3.5vw,38px);max-width:680px">
+          <p style="margin:0;font-size:16.5px;line-height:1.66;color:#5C5549;text-wrap:pretty">I led a product research platform that helped organisations benchmark customer experience, validate product decisions, and prioritise digital investments across financial services, energy, education, pensions and sports betting.</p>
+          <div style="margin-top:22px;padding-top:20px;border-top:1px solid #E2DCCF;display:flex;align-items:flex-start;gap:11px">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#6E6759" stroke-width="1.4" aria-hidden="true" style="flex:0 0 auto;margin-top:2px"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.5 12h17M12 3.5c2.4 2.3 2.4 14.2 0 17M12 3.5c-2.4 2.3-2.4 14.2 0 17"></path></svg>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#5C5549;text-wrap:pretty">Used by organisations across Australia, Ireland, the UK, Spain, Canada and the United States.</p>
+          </div>
+        </div>
+        <div style="margin-top:clamp(28px,3.5vw,38px)">
+          <div role="tablist" aria-label="Industries" style="display:flex;flex-wrap:wrap;gap:9px">
+            <sc-for list="{{ brandTabs }}" as="t" hint-placeholder-count="6">
+              <button type="button" role="tab" aria-selected="{{ t.selected }}" onClick="{{ t.onClick }}" style="font-family:'Instrument Sans',system-ui,sans-serif;font-size:14.5px;font-weight:600;letter-spacing:-0.005em;padding:11px 22px;border-radius:999px;cursor:pointer;transition:background .15s ease, color .15s ease, border-color .15s ease;background:{{ t.bg }};color:{{ t.fg }};border:1px solid {{ t.border }}">{{ t.label }}</button>
+            </sc-for>
+          </div>
+          <div style="margin-top:18px;background:#FFFFFF;border:1px solid #E7E1D4;border-radius:16px;padding:clamp(18px,2.5vw,28px)">
+            <div style="display:grid;gap:12px;grid-template-columns:{{ tileCols }}">
+              <sc-for list="{{ activeBrands }}" as="b" hint-placeholder-count="6">
+                <div style="box-sizing:border-box;background:#F4F1EA;border-radius:12px;height:104px;display:flex;align-items:center;justify-content:center;padding:14px 18px;min-width:0">
+                  <span style="font-size:16.5px;font-weight:600;letter-spacing:-0.01em;color:#332E27;text-align:center;line-height:1.3;text-wrap:balance">{{ b.name }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="margin-top:clamp(20px,2.5vw,28px);background:#F1EDE4;border-radius:10px;padding:22px 24px;display:flex;align-items:flex-start;gap:14px">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--accent,#C03D10)" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" style="flex:0 0 auto;margin-top:1px"><circle cx="12" cy="12" r="8.5"></circle><path d="M8.8 14.5v-2.6M12 14.5V9.5M15.2 14.5v-4"></path></svg>
+            <p style="margin:0;font-size:15.5px;line-height:1.6;color:#39332B;text-wrap:pretty">Together, these platforms served organisations reaching millions of customers worldwide.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-screen-label="Testimonials" style="padding:0 clamp(20px,5vw,48px) clamp(76px,10vw,132px);scroll-margin-top:70px">
+      <div style="max-width:1200px;margin:0 auto">
+        <div style="display:flex;align-items:center;gap:18px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;color:var(--accent,#C03D10)">05</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <h2 style="margin:20px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-0.015em">What it's like to work with me</h2>
+        <div style="margin-top:clamp(32px,4vw,46px);display:grid;gap:16px;align-items:stretch;grid-template-columns:{{ quoteCols }}">
+          <figure style="margin:0;background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:clamp(26px,3vw,34px);display:flex;flex-direction:column">
+            <figcaption style="margin:0 0 20px;padding:0 0 20px;border-bottom:1px solid #EFEAE0;display:flex;align-items:center;gap:13px">
+            <img src="assets/people/katie-gandomi.jpg" alt="Katie Gandomi" loading="lazy" style="flex:0 0 auto;width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center top;border:1px solid #E2DCCF">
+            <span style="min-width:0;display:flex;flex-direction:column;gap:3px;font-family:'IBM Plex Mono',monospace">
+                <span style="font-size:12.5px;line-height:1.5;font-weight:600;color:#211D18">Katie Gandomi</span>
+                <span style="font-size:11.5px;line-height:1.5;color:#6E675D;min-height:4.5em">Co-Founder at Avantsoft</span>
+              </span>
+          </figcaption>
+            <blockquote style="margin:0;font-size:16px;line-height:1.7;color:#39332B;text-wrap:pretty">“There are very few that I can compare with Ezequiel’s natural talent for digital product management. His ability to understand the underlying needs of an organization and translate these business requirements into actionable steps that can be effectively produced by a software development team is rare.”</blockquote>
+          </figure>
+          <figure style="margin:0;background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:clamp(26px,3vw,34px);display:flex;flex-direction:column">
+            <figcaption style="margin:0 0 20px;padding:0 0 20px;border-bottom:1px solid #EFEAE0;display:flex;align-items:center;gap:13px">
+              <img src="assets/people/jefferson-araujo.jpg" alt="Jefferson Araujo" loading="lazy" style="flex:0 0 auto;width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center top;border:1px solid #E2DCCF">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:3px;font-family:'IBM Plex Mono',monospace">
+                <span style="font-size:12.5px;line-height:1.5;font-weight:600;color:#211D18">Jefferson Araujo</span>
+                <span style="font-size:11.5px;line-height:1.5;color:#6E675D;min-height:4.5em">Software Developer at Avantsoft</span>
+              </span>
+            </figcaption>
+            <blockquote style="margin:0;font-size:16px;line-height:1.7;color:#39332B;text-wrap:pretty">“Ezequiel set the direction — the interface, the design, the product vision — and consistently checked whether each release would actually deliver value to the end user rather than just shipping. We built an AI agent together to replace a long, repetitive manual process: it cut processing time dramatically and freed up the people who had been doing that work by hand — and we shipped it fast. Ezequiel is the rare product leader who pairs a genuine user focus with the data instinct to know what is worth automating and how to do it well.”</blockquote>
+          </figure>
+          <figure style="margin:0;background:#FFFFFF;border:1px solid #E7E1D4;border-radius:12px;padding:clamp(26px,3vw,34px);display:flex;flex-direction:column">
+            <figcaption style="margin:0 0 20px;padding:0 0 20px;border-bottom:1px solid #EFEAE0;display:flex;align-items:center;gap:13px">
+              <img src="assets/people/jason-hayes.jpg" alt="Jason Hayes" loading="lazy" style="flex:0 0 auto;width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center top;border:1px solid #E2DCCF">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:3px;font-family:'IBM Plex Mono',monospace">
+                <span style="font-size:12.5px;line-height:1.5;font-weight:600;color:#211D18">Jason Hayes</span>
+                <span style="font-size:11.5px;line-height:1.5;color:#6E675D;min-height:4.5em">Lead Digital &amp; CX Strategist, Global Reviews</span>
+              </span>
+            </figcaption>
+            <blockquote style="margin:0;font-size:16px;line-height:1.7;color:#39332B;text-wrap:pretty">“As a Lead Consultant, my analysis and client delivery relied heavily on the tools Ezequiel built. Where most people stop at the brief, Ezequiel consistently went further, offering ideas, spotting problems others had missed, and quietly making everyone else’s work better. He is the rare combination of technical delivery, thoughtful communication and genuine generosity toward the people around him.”</blockquote>
+          </figure>
+        </div>
+        <p style="margin:32px 0 0"><a href="https://ie.linkedin.com/in/ezequielcirilo" target="_blank" rel="noopener" style="font-size:15px;font-weight:600;color:var(--accent,#C03D10);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px">See more recommendations on LinkedIn →</a></p>
+      </div>
+    </section>
+    <section id="about" data-screen-label="About & Contact" style="padding:0 clamp(20px,5vw,48px) clamp(84px,11vw,140px);scroll-margin-top:70px">
+      <div style="max-width:1200px;margin:0 auto">
+        <div style="display:flex;align-items:center;gap:18px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;color:var(--accent,#C03D10)">06</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <h2 style="margin:20px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-0.015em">About</h2>
+        <div style="margin-top:clamp(28px,3.5vw,40px);display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(28px,5vw,64px)">
+          <div style="flex:999 1 440px;max-width:700px;display:flex;flex-direction:column;gap:20px">
+          <p style="margin:0;font-size:17.5px;line-height:1.7;color:#39332B;text-wrap:pretty">Product leader based in Ireland. I have spent my career at the intersection of research operations, UX, and applied AI, taking products from zero to production across Insurance, Banking, Energy, Pension, Education, and Sports Betting.</p>
+          <p style="margin:0;font-size:16.5px;line-height:1.7;color:#5C5549;text-wrap:pretty">I also run an AI-native design workflow: production-ready UI designs and developer documentation generated directly from product specs with Claude Design, replacing the traditional Figma cycle. This site was built the same way.</p>
+          <p style="margin:0;font-size:17px;line-height:1.7;font-weight:600;color:#211D18;text-wrap:pretty">Open to AI Product Manager, Senior Product Manager, and Product Lead roles in Ireland (Dublin, Cork, or remote).</p>
+          </div>
+          <div style="flex:1 1 230px;max-width:300px;min-width:0">
+            <div style="aspect-ratio:4/5;width:100%">
+              <image-slot id="about-portrait" shape="rounded" radius="12" placeholder="Portrait photo (optional)"></image-slot>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:clamp(32px,4vw,44px);display:flex;align-items:center;flex-wrap:wrap;gap:12px">
+          <a href="mailto:ezequiel.cirilo@gmail.com" style="display:inline-flex;align-items:center;background:var(--accent,#C03D10);color:#FFFFFF;font-size:15px;font-weight:600;padding:14px 24px;border-radius:6px;text-decoration:none;transition:background .15s ease" style-hover="background:color-mix(in oklab, var(--accent,#C03D10) 82%, #000000);color:#FFFFFF">ezequiel.cirilo@gmail.com</a>
+          <a href="https://ie.linkedin.com/in/ezequielcirilo" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;border:1px solid #D8D0BE;color:#211D18;font-size:15px;font-weight:600;padding:13px 22px;border-radius:6px;text-decoration:none;transition:border-color .15s ease" style-hover="border-color:#211D18;color:#211D18">LinkedIn<span aria-hidden="true" style="font-size:13px">↗</span></a>
+          <a href="assets/Ezequiel_Cirilo_CV.pdf" style="display:inline-flex;align-items:center;gap:8px;border:1px solid #D8D0BE;color:#211D18;font-size:15px;font-weight:600;padding:13px 22px;border-radius:6px;text-decoration:none;transition:border-color .15s ease" style-hover="border-color:#211D18;color:#211D18">Download CV<span aria-hidden="true" style="font-size:13px">↓</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer data-screen-label="Footer" style="background:#181511;padding:30px clamp(20px,5vw,48px)">
+    <div style="max-width:1200px;margin:0 auto">
+      <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.04em;color:#8A8272">© 2026 Ezequiel Cirilo</p>
+    </div>
+  </footer>
+  <template id="__bundler_thumbnail" data-bg-color="#181511">
+    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="96" height="96" fill="#181511"></rect>
+      <text x="48" y="60" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="600" fill="#C03D10">EC</text>
+    </svg>
+  </template>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accentPalette&quot;: {
+    &quot;editor&quot;: &quot;color&quot;,
+    &quot;default&quot;: [&quot;#C03D10&quot;, &quot;#E8632C&quot;],
+    &quot;options&quot;: [[&quot;#C03D10&quot;, &quot;#E8632C&quot;], [&quot;#0E5A43&quot;, &quot;#4CBE93&quot;], [&quot;#1F45B8&quot;, &quot;#7C9EF6&quot;]],
+    &quot;tsType&quot;: &quot;string[]&quot;,
+    &quot;section&quot;: &quot;Theme&quot;
+  }
+}">
+class Component extends DCLogic {
+  state = {
+    isMobile: typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(max-width: 859px)').matches : false,
+    width: typeof window !== 'undefined' ? window.innerWidth : 1200,
+    menuOpen: false,
+    activeBrand: 0
+  };
+  componentDidMount() {
+    this.mq = window.matchMedia('(max-width: 859px)');
+    this.onMq = (e) => this.setState({ isMobile: e.matches, menuOpen: false });
+    this.mq.addEventListener('change', this.onMq);
+    this.onResize = () => this.setState({ width: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    this.applyAccent();
+  }
+  componentDidUpdate() { this.applyAccent(); }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.onMq);
+    if (this.onResize) window.removeEventListener('resize', this.onResize);
+  }
+  applyAccent() {
+    const root = document.getElementById('ec-root');
+    if (!root) return;
+    const p = Array.isArray(this.props.accentPalette) && this.props.accentPalette.length ? this.props.accentPalette : ['#C03D10', '#E8632C'];
+    root.style.setProperty('--accent', p[0]);
+    root.style.setProperty('--accent-bright', p[1] || p[0]);
+  }
+  brandData() {
+    const groups = [
+      ['Insurance', ['Allianz', 'AIG', 'Liberty Insurance', 'RACQ', 'Irish Life Health', 'Génesis by Liberty Seguros', 'Medibank']],
+      ['Banking', ['Nationwide', 'NAB', "St. James's Place", 'Vanguard', 'TD Bank']],
+      ['Energy', ['EnergyAustralia', 'Origin', 'Bord Gáis Energy', 'Energia', 'Power NI', 'SSE']],
+      ['Pension', ['AustralianSuper', 'Rest', 'Australian Retirement Trust', 'QSuper', 'Sunsuper']],
+      ['Education', ['University College Cork', 'The University of Sydney', 'University of New England', 'Griffith University', 'Deakin University', 'UNSW Sydney']],
+      ['Sports Betting', ['888', 'Ladbrokes', 'William Hill', 'Coral', 'bwin', 'Sportingbet', 'BetMGM']]
+    ];
+    const initials = (n) => {
+      const words = n.replace(/[^A-Za-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
+      const s = words.length > 1 ? words[0][0] + words[1][0] : words[0].slice(0, 2);
+      return s.toUpperCase();
+    };
+    return groups.map(([label, names]) => ({
+      label: label,
+      count: names.length,
+      brands: names.map((n, i) => ({
+        name: n,
+        initials: initials(n),
+        sep: i === names.length - 1 ? '' : '·',
+        rule: i === names.length - 1 ? 'transparent' : '#E2DCCF'
+      }))
+    }));
+  }
+  renderVals() {
+    const isMobile = this.state.isMobile;
+    const bd = this.brandData();
+    const qStack = this.state.width < 1120;
+    const active = Math.min(this.state.activeBrand || 0, bd.length - 1);
+    return {
+      isMobile: isMobile,
+      isDesktop: !isMobile,
+      menuOpen: isMobile && this.state.menuOpen,
+      toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      tileCols: this.state.width < 560 ? 'repeat(2, minmax(0, 1fr))' : 'repeat(3, minmax(0, 1fr))',
+      brandTabs: bd.map((g, i) => ({
+        label: g.label,
+        selected: i === active,
+        bg: i === active ? '#181511' : '#FFFFFF',
+        fg: i === active ? '#F4F1EB' : '#332E27',
+        border: i === active ? '#181511' : '#E2DCCF',
+        onClick: () => this.setState({ activeBrand: i })
+      })),
+      activeBrands: bd[active].brands,
+      quoteCols: qStack ? '1fr' : 'repeat(3, minmax(0, 1fr))',
+      loopTop: this.state.width < 1100 ? '30%' : '58%',
+      loopCardFlex: isMobile ? '1 1 auto' : this.state.width < 1100 ? '1 1 calc(50% - 3px)' : '1 1 0',
+      loopArrow: !isMobile && this.state.width < 1100 ? 'none' : 'flex',
+      brandCols: (() => {
+        const w = this.state.width;
+        const n = w < 560 ? 2 : w < 900 ? 3 : w < 1200 ? 5 : 6;
+        return 'repeat(' + n + ', minmax(0, 1fr))';
+      })()
+    };
+  }
+}
+</script>
+</body>
+</html>

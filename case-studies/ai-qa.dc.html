@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading the users to teach the machine — Ezequiel Cirilo</title>
+<meta name="description" content="How the team's own behaviour, not model tuning, turned an expensive, over-scoped AI into a fast, affordable QA copilot.">
+<meta property="og:title" content="Reading the users to teach the machine">
+<meta property="og:description" content="How the team's own behaviour, not model tuning, turned an expensive, over-scoped AI into a fast, affordable QA copilot.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C03D10'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,500&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: #F7F5F0; color: #211D18; font-family: 'Instrument Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: #C03D10; }
+  a:hover { color: #8F2D0A; }
+  ::selection { background: #C03D10; color: #FFFFFF; }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div id="cs-root" style="min-height:100vh">
+  <nav aria-label="Primary" style="position:sticky;top:0;z-index:50;background:rgba(24,21,17,0.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(244,241,235,0.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,48px);height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <a href="../index.html" style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:19px;color:#F4F1EB;text-decoration:none;letter-spacing:-0.01em;white-space:nowrap">Ezequiel Cirilo</a>
+      <div style="display:flex;align-items:center;gap:clamp(14px,2.5vw,30px)">
+        <a href="../index.html#case-studies" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#A8A199;text-decoration:none" style-hover="color:#F4F1EB">← All work</a>
+        <a href="mailto:ezequiel.cirilo@gmail.com" style="background:#C03D10;color:#FFFFFF;font-size:13.5px;font-weight:600;padding:10px 18px;border-radius:6px;text-decoration:none;white-space:nowrap" style-hover="background:#8F2D0A">Get in touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <header data-screen-label="Hero" style="background:#181511;color:#F4F1EB;padding:clamp(44px,7vw,78px) clamp(20px,5vw,48px) clamp(52px,8vw,86px)">
+    <div style="max-width:1060px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span aria-hidden="true" style="display:inline-block;width:9px;height:9px;background:#C03D10"></span>
+        <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#E8632C">Case study — AI-assisted quality assurance</p>
+      </div>
+
+
+      <h1 style="margin:clamp(26px,3.5vw,38px) 0 0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(36px,6.2vw,72px);line-height:1.04;letter-spacing:-0.025em;max-width:15em;text-wrap:balance">Reading the users to teach the machine</h1>
+      <p style="margin:clamp(22px,3vw,30px) 0 0;max-width:720px;font-size:clamp(17px,1.5vw,20px);line-height:1.62;color:#B9B2A6;text-wrap:pretty">How the team's own behaviour, not model tuning, turned an expensive, over-scoped AI into a fast, affordable QA copilot that keeps the human in charge of every decision.</p>
+      <div style="margin-top:clamp(32px,4.5vw,48px);border:1px solid rgba(244,241,235,0.14);border-radius:14px;overflow:hidden;background:#141210">
+        <div style="display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid rgba(244,241,235,0.1);background:rgba(244,241,235,0.03)">
+          <span aria-hidden="true" style="width:9px;height:9px;border-radius:50%;background:rgba(244,241,235,0.18)"></span>
+          <span aria-hidden="true" style="width:9px;height:9px;border-radius:50%;background:rgba(244,241,235,0.18)"></span>
+          <span aria-hidden="true" style="width:9px;height:9px;border-radius:50%;background:rgba(244,241,235,0.18)"></span>
+          <span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#A8A199">QA review workspace</span>
+        </div>
+        <div style="width:100%;background:#0F0E0C;display:flex">
+          <img src="../assets/case-ai-qa-hero.png" alt="The QA review workspace: an analyst reviewing an AI suggestion on a captured screenshot, with confidence score and confirm or decline controls." style="display:block;width:100%;height:auto">
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main style="padding:clamp(56px,8vw,96px) clamp(20px,5vw,48px) clamp(64px,9vw,110px)">
+    <div style="max-width:1060px;margin:0 auto">
+
+      <section data-screen-label="Context" style="max-width:720px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">01</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">Context</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">On our internal research operations platform, Quality Assurance is the heaviest workflow. For every study, Quality Analysts confirm whether each audited feature is genuinely present on a brand's website, evidenced by a screenshot, across up to 3,000 individual criteria decisions per study. It is careful work at high volume, and it was the single biggest time cost on the platform.</p>
+      </section>
+
+      <section data-screen-label="The problem" style="margin-top:clamp(52px,7vw,84px);max-width:720px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">02</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">The problem</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">The first version of AI-assisted QA was expensive and slow. Every uploaded image was assessed against every criterion in the study. An assessment with 200 criteria and 200 images generated 40,000 comparisons, the overwhelming majority of them meaningless, at roughly $30 per assessment in AI costs alone. The AI was doing enormous work to answer questions no analyst would ever ask.</p>
+        <p style="margin:28px 0 0;padding:20px 24px;background:#FDF3EE;border-left:2px solid #C03D10;border-radius:0 8px 8px 0;font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(19px,2.1vw,24px);line-height:1.45;letter-spacing:-0.01em;color:#211D18">200 criteria × 200 images = 40,000 comparisons, nearly all of them meaningless.</p>
+      </section>
+
+      <section data-screen-label="The insight" style="margin-top:clamp(52px,7vw,84px)">
+        <div style="max-width:720px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">03</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">The insight</span>
+            <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+          </div>
+          <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">Rather than reach for model tuning, I looked at how the analysts were already working. Studying the manual tags QAers had created, I saw a clear pattern: they almost always evidenced a criterion using images uploaded within that criterion's own category. The humans had already drawn the natural boundary. I directed the development team to rescope the AI to match it: assess each image only against the criteria in its own category, not the entire study. Iterations collapsed from 40,000 to a fraction. The AI cost alone fell from around $30 per assessment to roughly $2 to $3. Speed improved sharply.</p>
+        </div>
+        <figure style="margin:clamp(32px,4vw,44px) 0 0">
+          <div style="border:1px solid #E7E1D4;border-radius:12px;overflow:hidden;background:#FFFFFF">
+            <div style="display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid #EFEAE0">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#5C5548">Scope of assessment — before and after the rescope</span>
+            </div>
+            <div role="img" aria-label="Before and after the rescope. Before: 200 images multiplied by 200 criteria across the whole study — 40,000 AI comparisons, nearly all meaningless, at about $30 per assessment. After: each image is assessed only against the criteria in its own category — Onboarding, Payments, Support — so only relevant comparisons run, at roughly $2 to $3 per assessment." style="padding:clamp(20px,2.6vw,30px);background:#F7F5F0;display:grid;grid-template-columns:{{ baCols }};gap:16px;align-items:stretch">
+
+              <div style="box-sizing:border-box;min-width:0;border:1px solid #E7E1D4;border-radius:10px;background:#FFFFFF;padding:clamp(16px,2vw,22px);display:flex;flex-direction:column;gap:16px">
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#F4F1EB;background:#181511;padding:5px 10px;border-radius:4px">Before</span>
+                  <p style="margin:0;font-size:13.5px;font-weight:600;line-height:1.4;color:#211D18">AI assessed every image against every criterion in the study</p>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#6B6255">Images</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center"><span style="flex:0 0 auto;width:30px;height:23px;border:1px solid #C6BEB0;border-radius:4px;background:#EFEBE3"></span><span style="flex:0 0 auto;width:30px;height:23px;border:1px solid #C6BEB0;border-radius:4px;background:#EFEBE3"></span><span style="flex:0 0 auto;width:30px;height:23px;border:1px solid #C6BEB0;border-radius:4px;background:#EFEBE3"></span><span style="flex:0 0 auto;width:30px;height:23px;border:1px solid #C6BEB0;border-radius:4px;background:#EFEBE3"></span><span style="flex:0 0 auto;width:30px;height:23px;border:1px solid #C6BEB0;border-radius:4px;background:#EFEBE3"></span><span style="flex:0 0 auto;width:30px;height:23px;border:1px solid #C6BEB0;border-radius:4px;background:#EFEBE3"></span><span style="flex:0 0 auto;width:30px;height:23px;border:1px solid #C6BEB0;border-radius:4px;background:#EFEBE3"></span><span style="flex:0 0 auto;width:30px;height:23px;border:1px solid #C6BEB0;border-radius:4px;background:#EFEBE3"></span><span style="flex:0 0 auto;width:30px;height:23px;border:1px solid #C6BEB0;border-radius:4px;background:#EFEBE3"></span><span style="font-size:12px;color:#6E675D;letter-spacing:0.1em">…</span></div>
+                </div>
+
+                <span aria-hidden="true" style="align-self:center;font-size:17px;line-height:1;color:#6E675D">×</span>
+
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#6B6255">Criteria (200)</p>
+                  <div style="display:grid;grid-template-columns:{{ beforeCatCols }};gap:10px">
+                    <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5C5548;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Onboarding</p><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5C5548;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Payments</p><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5C5548;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Support</p><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5C5548;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:{{ extraColDisplay }}">Navigation</p><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5C5548;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:{{ extraColDisplay }}">Security</p>
+                  </div>
+                  <div style="display:grid;grid-template-columns:{{ beforeCatCols }};gap:10px"><div style="min-width:0;display:flex;flex-direction:column;gap:7px"><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:78%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:60%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:72%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:64%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:80%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:58%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:70%"></span></div></div><div style="min-width:0;display:flex;flex-direction:column;gap:7px"><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:78%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:60%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:72%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:64%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:80%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:58%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:70%"></span></div></div><div style="min-width:0;display:flex;flex-direction:column;gap:7px"><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:78%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:60%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:72%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:64%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:80%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:58%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:70%"></span></div></div><div style="min-width:0;display:{{ extraColFlex }};flex-direction:column;gap:7px"><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:78%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:60%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:72%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:64%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:80%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:58%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:70%"></span></div></div><div style="min-width:0;display:{{ extraColFlex }};flex-direction:column;gap:7px"><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:78%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:60%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:72%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:64%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:80%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:58%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C6BEB0;border-radius:2px;background:#C6BEB0"></span><span style="height:4px;border-radius:2px;background:#E2DCCF;width:70%"></span></div></div></div>
+                  <p style="margin:0;font-size:11.5px;line-height:1.45;color:#6B6255">Every image checked against every criterion.</p>
+                </div>
+
+                <div style="margin-top:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;background:#F1EEE7;border-radius:8px;padding:14px 16px">
+                  <div>
+                    <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:22px;line-height:1.1;letter-spacing:-0.02em;color:#211D18">40,000</p>
+                    <p style="margin:5px 0 0;font-size:12px;line-height:1.45;color:#5C5548">AI comparisons — most meaningless</p>
+                  </div>
+                  <div>
+                    <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:22px;line-height:1.1;letter-spacing:-0.02em;color:#211D18">~$30</p>
+                    <p style="margin:5px 0 0;font-size:12px;line-height:1.45;color:#5C5548">Per assessment</p>
+                  </div>
+                </div>
+              </div>
+
+              <span aria-hidden="true" style="display:{{ baArrowDisplay }};align-items:center;justify-content:center;font-size:16px;color:#6E675D">→</span>
+
+              <div style="box-sizing:border-box;min-width:0;border:2px solid #C03D10;border-radius:10px;background:#FDF3EE;padding:clamp(15px,2vw,21px);display:flex;flex-direction:column;gap:16px">
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#FFFFFF;background:#C03D10;padding:5px 10px;border-radius:4px">After</span>
+                  <p style="margin:0;font-size:13.5px;font-weight:600;line-height:1.4;color:#211D18">AI assesses each image only against criteria in its own category</p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:{{ afterCatCols }};gap:16px;background:#FFFFFF;border-radius:8px;padding:16px">
+                  <div style="min-width:0;display:flex;flex-direction:column;gap:11px">
+                  <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#C03D10">Onboarding</p>
+                  <p style="margin:0;font-size:11.5px;line-height:1.4;color:#6B6255">Images in this category</p>
+                  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;align-items:center"><span style="min-width:0;aspect-ratio:4/3;border:1px solid #E4B9A5;border-radius:4px;background:#FBEAE1"></span><span style="min-width:0;aspect-ratio:4/3;border:1px solid #E4B9A5;border-radius:4px;background:#FBEAE1"></span><span style="min-width:0;aspect-ratio:4/3;border:1px solid #E4B9A5;border-radius:4px;background:#FBEAE1"></span></div>
+                  <span aria-hidden="true" style="font-size:13px;line-height:1;color:#C03D10">↓</span>
+                  <p style="margin:0;font-size:12px;line-height:1.45;color:#2C2721"><strong style="font-weight:600">Onboarding</strong> criteria only</p>
+                  <div style="display:flex;flex-direction:column;gap:7px"><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C03D10;border-radius:2px;background:#C03D10"></span><span style="height:4px;border-radius:2px;background:#E9C6B4;width:76%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C03D10;border-radius:2px;background:#C03D10"></span><span style="height:4px;border-radius:2px;background:#E9C6B4;width:58%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C03D10;border-radius:2px;background:#C03D10"></span><span style="height:4px;border-radius:2px;background:#E9C6B4;width:70%"></span></div></div>
+                  <span aria-hidden="true" style="font-size:12px;color:#6E675D;letter-spacing:0.1em">…</span>
+                </div><div style="min-width:0;display:flex;flex-direction:column;gap:11px">
+                  <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#C03D10">Payments</p>
+                  <p style="margin:0;font-size:11.5px;line-height:1.4;color:#6B6255">Images in this category</p>
+                  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;align-items:center"><span style="min-width:0;aspect-ratio:4/3;border:1px solid #E4B9A5;border-radius:4px;background:#FBEAE1"></span><span style="min-width:0;aspect-ratio:4/3;border:1px solid #E4B9A5;border-radius:4px;background:#FBEAE1"></span><span style="min-width:0;aspect-ratio:4/3;border:1px solid #E4B9A5;border-radius:4px;background:#FBEAE1"></span></div>
+                  <span aria-hidden="true" style="font-size:13px;line-height:1;color:#C03D10">↓</span>
+                  <p style="margin:0;font-size:12px;line-height:1.45;color:#2C2721"><strong style="font-weight:600">Payments</strong> criteria only</p>
+                  <div style="display:flex;flex-direction:column;gap:7px"><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C03D10;border-radius:2px;background:#C03D10"></span><span style="height:4px;border-radius:2px;background:#E9C6B4;width:64%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C03D10;border-radius:2px;background:#C03D10"></span><span style="height:4px;border-radius:2px;background:#E9C6B4;width:80%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C03D10;border-radius:2px;background:#C03D10"></span><span style="height:4px;border-radius:2px;background:#E9C6B4;width:56%"></span></div></div>
+                  <span aria-hidden="true" style="font-size:12px;color:#6E675D;letter-spacing:0.1em">…</span>
+                </div><div style="min-width:0;display:flex;flex-direction:column;gap:11px">
+                  <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#C03D10">Support</p>
+                  <p style="margin:0;font-size:11.5px;line-height:1.4;color:#6B6255">Images in this category</p>
+                  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;align-items:center"><span style="min-width:0;aspect-ratio:4/3;border:1px solid #E4B9A5;border-radius:4px;background:#FBEAE1"></span><span style="min-width:0;aspect-ratio:4/3;border:1px solid #E4B9A5;border-radius:4px;background:#FBEAE1"></span><span style="min-width:0;aspect-ratio:4/3;border:1px solid #E4B9A5;border-radius:4px;background:#FBEAE1"></span></div>
+                  <span aria-hidden="true" style="font-size:13px;line-height:1;color:#C03D10">↓</span>
+                  <p style="margin:0;font-size:12px;line-height:1.45;color:#2C2721"><strong style="font-weight:600">Support</strong> criteria only</p>
+                  <div style="display:flex;flex-direction:column;gap:7px"><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C03D10;border-radius:2px;background:#C03D10"></span><span style="height:4px;border-radius:2px;background:#E9C6B4;width:70%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C03D10;border-radius:2px;background:#C03D10"></span><span style="height:4px;border-radius:2px;background:#E9C6B4;width:54%"></span></div><div style="display:flex;align-items:center;gap:7px"><span style="flex:0 0 auto;width:9px;height:9px;border:1px solid #C03D10;border-radius:2px;background:#C03D10"></span><span style="height:4px;border-radius:2px;background:#E9C6B4;width:78%"></span></div></div>
+                  <span aria-hidden="true" style="font-size:12px;color:#6E675D;letter-spacing:0.1em">…</span>
+                </div>
+                </div>
+
+                <div style="margin-top:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;background:#FFFFFF;border:1px solid #E4B9A5;border-radius:8px;padding:14px 16px">
+                  <div>
+                    <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:22px;line-height:1.1;letter-spacing:-0.02em;color:#C03D10">Only relevant</p>
+                    <p style="margin:5px 0 0;font-size:12px;line-height:1.45;color:#5C5548">comparisons — drastically fewer, all meaningful</p>
+                  </div>
+                  <div>
+                    <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:22px;line-height:1.1;letter-spacing:-0.02em;color:#C03D10">~$2–$3</p>
+                    <p style="margin:5px 0 0;font-size:12px;line-height:1.45;color:#5C5548">Per assessment</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#5C5548;max-width:660px;text-wrap:pretty">Before, every image was checked against every criterion in the study. After, each image is checked only against the criteria in its own category — the boundary the analysts had already drawn.</figcaption>
+        </figure>
+      </section>
+
+      <section data-screen-label="Keeping the human in charge" style="margin-top:clamp(56px,8vw,92px);display:grid;grid-template-columns:{{ splitColumns }};gap:clamp(28px,4vw,52px);align-items:start">
+        <div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">04</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">Keeping the human in charge</span>
+            <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+          </div>
+          <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">The point was never to remove the analyst. It was to remove the labour around their judgement. Analysts no longer hunt through every image for evidence a feature exists. The AI surfaces and tags the candidate evidence; the analyst does the part only a human should, confirming or overriding. Every override carries a reason, and that reason feeds back into the model, so human decisions continually sharpen the system while staying firmly in control.</p>
+        </div>
+        <figure style="margin:0">
+          <div style="border:1px solid #E7E1D4;border-radius:12px;overflow:hidden;background:#FFFFFF">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid #EFEAE0">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C5548">The override moment — recreation</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#5C5548">{{ stepLabel }}</span>
+            </div>
+
+            <div onMouseEnter="{{ hoverPause }}" onMouseLeave="{{ hoverResume }}" style="position:relative;padding:18px;background:#0B0E14;overflow:hidden">
+              <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(120% 90% at 20% 30%, #1C2233 0%, #0B0E14 70%)"></div>
+              <div aria-hidden="true" style="position:absolute;left:14px;top:14px;right:38%;bottom:14px;border:1.5px dashed #E8A33D;border-radius:6px"></div>
+              <div aria-hidden="true" style="position:absolute;left:10px;top:10px;width:9px;height:9px;border-radius:50%;background:#E8A33D"></div>
+
+              <div style="position:relative;border:1px solid rgba(255,255,255,0.1);border-radius:12px;background:#0E1220;padding:16px;display:grid;grid-template-areas:'step';align-items:start;box-shadow:0 18px 40px rgba(0,0,0,0.45)">
+
+                <div style="grid-area:step;visibility:{{ s1Vis }};opacity:{{ s1Op }};transition:opacity 320ms ease;display:flex;flex-direction:column;gap:13px">
+                  <span style="align-self:flex-start;background:#E8A33D;color:#1A1206;font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:20px">AI Suggestion</span>
+                  <p style="margin:0;font-size:13.5px;font-weight:600;line-height:1.45;color:#EEF1F7">If the bet amount exceeds the account balance, does a link to deposit appear in the mobile app?</p>
+                  <p style="margin:0;font-size:12px;color:#8C93A6">Deposit</p>
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#1A1F2E;border-radius:7px;padding:11px 13px">
+                    <span style="font-size:12.5px;color:#C6CBD8">Confidence</span>
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#E8A33D">98%</span>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:9px">
+                    <span style="border:1px solid #E85C5C;color:#F08A8A;font-size:12.5px;font-weight:600;padding:9px 17px;border-radius:20px">Decline</span>
+                    <span style="background:#2E9BF0;color:#08131F;font-size:12.5px;font-weight:600;padding:9px 17px;border-radius:20px">Confirm</span>
+                  </div>
+                </div>
+
+                <div style="grid-area:step;visibility:{{ s2Vis }};opacity:{{ s2Op }};transition:opacity 320ms ease;display:flex;flex-direction:column;gap:13px">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <span aria-hidden="true" style="color:#8C93A6;font-size:14px;line-height:1">‹</span>
+                    <span style="background:#E8A33D;color:#1A1206;font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:20px">Decline AI Tag</span>
+                  </div>
+                  <p style="margin:0;font-size:13px;line-height:1.45;color:#C6CBD8">If the bet amount exceeds the account balance, does a link to deposit appear in the mobile app?</p>
+                  <div style="display:flex;flex-direction:column;gap:11px">
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <span style="flex:0 0 auto;width:14px;height:14px;border-radius:50%;border:2px solid {{ r1Border }};background:{{ r1Fill }};box-shadow:{{ r1Dot }}"></span>
+                      <span style="font-size:12.5px;color:#EEF1F7">Tag is misplaced</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <span style="flex:0 0 auto;width:14px;height:14px;border-radius:50%;border:2px solid #4A5266"></span>
+                      <span style="font-size:12.5px;color:#C6CBD8">Feature misinterpreted</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <span style="flex:0 0 auto;width:14px;height:14px;border-radius:50%;border:2px solid #4A5266"></span>
+                      <span style="font-size:12.5px;color:#C6CBD8">Other</span>
+                    </div>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:9px">
+                    <span style="background:#252A38;color:#C6CBD8;font-size:12.5px;font-weight:600;padding:9px 17px;border-radius:7px">Cancel</span>
+                    <span style="background:#E8484B;color:#FFFFFF;font-size:12.5px;font-weight:600;padding:9px 17px;border-radius:7px">Decline</span>
+                  </div>
+                </div>
+
+                <div style="grid-area:step;visibility:{{ s3Vis }};opacity:{{ s3Op }};transition:opacity 320ms ease;display:flex;flex-direction:column;gap:13px">
+                  <span style="align-self:flex-start;background:rgba(232,163,61,0.14);color:#E8A33D;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:6px 11px;border-radius:20px">Reason captured</span>
+                  <p style="margin:0;font-size:13.5px;font-weight:600;line-height:1.45;color:#EEF1F7">Declined — tag is misplaced</p>
+                  <div style="display:flex;flex-direction:column;gap:11px;background:#1A1F2E;border-radius:7px;padding:13px">
+                    <p style="margin:0;font-size:12px;line-height:1.5;color:#C6CBD8">The criterion returns to the analyst's queue — and the reason becomes training signal.</p>
+                    <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#E8A33D">↺ This override</span>
+                      <span aria-hidden="true" style="color:#6E767A;font-size:12px">→</span>
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#E8A33D">Sharper suggestions next assessment</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px">
+                      <span aria-hidden="true" style="flex:1;height:4px;border-radius:2px;background:linear-gradient(to right,#E8A33D 0%,#E8A33D 82%,#333B4E 82%,#333B4E 100%)"></span>
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:#E8A33D">87%</span>
+                    </div>
+                    <p style="margin:0;font-size:11px;line-height:1.45;color:#8C93A6">Approval rate today — every reason nudges it up.</p>
+                  </div>
+                </div>
+
+                <span aria-hidden="true" style="position:absolute;left:{{ cursorLeft }};top:{{ cursorTop }};opacity:{{ cursorOpacity }};transition:left 620ms cubic-bezier(0.4,0,0.2,1),top 620ms cubic-bezier(0.4,0,0.2,1),opacity 260ms linear;pointer-events:none;font-size:15px;line-height:1;color:#FFFFFF;text-shadow:0 1px 3px rgba(0,0,0,0.8)">➤</span>
+                <span aria-hidden="true" style="position:absolute;left:{{ cursorLeft }};top:{{ cursorTop }};width:26px;height:26px;margin:-6px 0 0 -6px;border-radius:50%;border:2px solid #FFFFFF;opacity:{{ clickOpacity }};transform:scale({{ clickScale }});transition:opacity 300ms linear,transform 300ms ease-out;pointer-events:none"></span>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:8px;padding:11px 14px;border-top:1px solid #EFEAE0;background:#FBFAF7">
+              <button type="button" onClick="{{ goStep1 }}" aria-label="Step 1 — AI suggestion" style="width:30px;height:30px;padding:0;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center">
+                <span style="width:8px;height:8px;border-radius:50%;background:{{ dot1 }}"></span>
+              </button>
+              <button type="button" onClick="{{ goStep2 }}" aria-label="Step 2 — choose a reason" style="width:30px;height:30px;padding:0;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center">
+                <span style="width:8px;height:8px;border-radius:50%;background:{{ dot2 }}"></span>
+              </button>
+              <button type="button" onClick="{{ goStep3 }}" aria-label="Step 3 — reason captured" style="width:30px;height:30px;padding:0;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center">
+                <span style="width:8px;height:8px;border-radius:50%;background:{{ dot3 }}"></span>
+              </button>
+              <p style="margin:0 0 0 4px;flex:1;min-width:0;font-size:12px;line-height:1.4;color:#5C5548">{{ stepCaption }}</p>
+              <button type="button" onClick="{{ togglePlay }}" aria-label="{{ playLabel }}" style="flex:0 0 auto;display:flex;align-items:center;gap:7px;min-height:30px;padding:6px 12px;border:1px solid #DDD7CA;border-radius:20px;background:#FFFFFF;color:#5C5548;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer" style-hover="border-color:#C03D10;color:#C03D10">{{ playGlyph }} {{ playLabel }}</button>
+            </div>
+          </div>
+          <figcaption style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#5C5548;text-wrap:pretty">Every override carries a reason. That reason is the training signal.</figcaption>
+        </figure>
+      </section>
+
+      <section data-screen-label="Loop diagram" style="margin-top:clamp(34px,4.5vw,48px)">
+        <div role="img" aria-label="Loop: an auditor uploads evidence grouped by category; the AI assesses each image scoped to its own category; the AI suggests and tags candidate evidence; if it is not confident after retries it escalates to a human; otherwise the analyst confirms or overrides, and every override captures a reason that feeds back to the scoped assessment." style="border:1px solid #E7E1D4;border-radius:16px;background:#FFFFFF;padding:clamp(24px,3.5vw,40px);box-sizing:border-box;width:min(1300px,calc(100vw - 40px));margin-left:50%;transform:translateX(-50%)">
+          <p style="margin:0 0 clamp(24px,3vw,32px);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">The loop</p>
+          <div style="display:grid;grid-template-columns:{{ gridCols }};gap:14px;align-items:stretch">
+            <div style="box-sizing:border-box;min-width:0;border:1px solid #E7E1D4;border-radius:12px;padding:18px 18px 20px;background:#FBFAF7;display:flex;flex-direction:column;gap:10px">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.16em;color:#6E675D">01</span>
+              <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">Auditor uploads evidence</p>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5C5548">Screenshot images, grouped by category.</p>
+            </div>
+            <div style="box-sizing:border-box;min-width:0;border:1px solid #E7E1D4;border-radius:12px;padding:18px 18px 20px;background:#FBFAF7;display:flex;flex-direction:column;gap:10px;position:relative">
+              <span aria-hidden="true" style="position:absolute;left:-13px;top:50%;transform:translate(-50%,-50%);color:#6E675D;font-size:15px;line-height:1;display:{{ arrowDisplay }}">→</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.16em;color:#6E675D">02</span>
+              <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">AI assesses, scoped to category</p>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5C5548">Each image checked only against criteria in its own category.</p>
+            </div>
+            <div style="box-sizing:border-box;min-width:0;border:1px solid #E7E1D4;border-radius:12px;padding:18px 18px 20px;background:#FBFAF7;display:flex;flex-direction:column;gap:10px;position:relative">
+              <span aria-hidden="true" style="position:absolute;left:-13px;top:50%;transform:translate(-50%,-50%);color:#6E675D;font-size:15px;line-height:1;display:{{ arrowDisplay }}">→</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.16em;color:#6E675D">03</span>
+              <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">AI suggests and tags candidate evidence</p>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5C5548">Surfaced against the matching criterion.</p>
+            </div>
+            <div style="box-sizing:border-box;min-width:0;border:1px dashed #C6BEB0;border-radius:12px;padding:18px 18px 20px;background:#F7F5F0;display:flex;flex-direction:column;gap:10px;position:relative">
+              <span aria-hidden="true" style="position:absolute;left:-13px;top:50%;transform:translate(-50%,-50%);color:#6E675D;font-size:15px;line-height:1;display:{{ arrowDisplay }}">→</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.16em;color:#6E675D">04</span>
+              <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">Confident?</p>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5C5548">Checked after retries, before anything reaches the analyst.</p>
+            </div>
+            <div style="box-sizing:border-box;min-width:0;order:{{ humanOrder }};border:2px solid #C03D10;border-radius:12px;padding:17px 17px 19px;background:#FDF3EE;display:flex;flex-direction:column;gap:10px;position:relative">
+              <span aria-hidden="true" style="position:absolute;left:-14px;top:50%;transform:translate(-50%,-50%);color:#C03D10;font-size:15px;line-height:1;display:{{ arrowDisplay }}">→</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.16em;color:#C03D10;white-space:nowrap">05 — Human</span>
+              <p style="margin:0;font-size:15.5px;font-weight:600;line-height:1.35;color:#211D18">Analyst confirms or overrides</p>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:#6B4230">The decision stays with the person. Always.</p>
+            </div>
+
+            <div style="grid-column:{{ escCol }};grid-row:{{ escRow }};order:{{ escOrder }};min-width:0;display:flex;flex-direction:column;gap:8px;padding-top:14px">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#6E675D">↓ No, after retries</span>
+              <div style="border:1px solid #C6BEB0;border-radius:12px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:8px">
+                <p style="margin:0;font-size:15px;font-weight:600;line-height:1.35;color:#211D18">Escalate to human</p>
+                <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5C5548">A deliberate hand-off, not an error. The agent never fabricates an answer it cannot evidence.</p>
+              </div>
+            </div>
+
+            <div aria-hidden="true" style="grid-column:{{ loopCol }};grid-row:{{ loopRow }};order:{{ loopOrder }};position:relative;margin-top:18px;min-height:{{ loopMinHeight }};border-left:1px dashed #C03D10;border-right:{{ loopSide }};border-bottom:{{ loopSide }};border-radius:{{ loopRadius }};pointer-events:none">
+              <span style="position:absolute;left:-5px;top:-8px;color:#C03D10;font-size:11px;line-height:1">▲</span>
+              <span style="position:absolute;left:{{ labelLeft }};top:{{ labelTop }};bottom:{{ labelBottom }};transform:{{ labelTransform }};background:#FFFFFF;padding:{{ labelPad }};font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#C03D10;white-space:nowrap">↺ Reason captured → back to step 02</span>
+            </div>
+          </div>
+        </div>
+        <p style="margin:16px 0 0;max-width:720px;font-size:14.5px;line-height:1.65;color:#5C5548;text-wrap:pretty">The AI carries the load. The human keeps the decision. Every override teaches the model, and the agent hands back the moment it is unsure.</p>
+      </section>
+
+      <section data-screen-label="Knowing when to stop" style="margin-top:clamp(52px,7vw,84px);max-width:720px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">05</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">Knowing when to stop</span>
+          <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+        </div>
+        <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">The agent is bounded not only in what it checks but in when it defers. If it cannot confirm a feature with confidence after its retries, it does not fabricate an answer. It fails gracefully and escalates that item to a human. The system is designed around its own limits.</p>
+      </section>
+
+      <section data-screen-label="Outcome" style="margin-top:clamp(56px,8vw,92px)">
+        <div style="max-width:720px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;color:#C03D10">06</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C5548">Outcome</span>
+            <span aria-hidden="true" style="height:1px;flex:1;background:#E2DCCF"></span>
+          </div>
+          <p style="margin:24px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.6;letter-spacing:-0.005em;color:#2C2721;text-wrap:pretty">87% of AI suggestions are now approved without correction. A QA pass that once took six to eight hours now takes two and a half to three, a 69% reduction, at a fraction of the original cost.</p>
+        </div>
+        <div style="margin-top:clamp(30px,4vw,42px);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:#E2DCCF;border:1px solid #E2DCCF;border-radius:14px;overflow:hidden">
+          <div style="background:#FFFFFF;padding:clamp(22px,3vw,30px)">
+            <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(40px,4.4vw,54px);line-height:1;letter-spacing:-0.03em;color:#C03D10">87%</p>
+            <p style="margin:12px 0 0;font-size:14px;line-height:1.5;color:#5C5548">of AI suggestions approved without correction</p>
+          </div>
+          <div style="background:#FFFFFF;padding:clamp(22px,3vw,30px)">
+            <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(40px,4.4vw,54px);line-height:1;letter-spacing:-0.03em;color:#C03D10">69%</p>
+            <p style="margin:12px 0 0;font-size:14px;line-height:1.5;color:#5C5548">faster QA pass — 6–8 hrs down to 2.5–3 hrs</p>
+          </div>
+          <div style="background:#FFFFFF;padding:clamp(22px,3vw,30px)">
+            <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(40px,4.4vw,54px);line-height:1;letter-spacing:-0.03em;color:#C03D10">$30<span style="font-size:0.5em;color:#6E675D"> → </span>$3</p>
+            <p style="margin:12px 0 0;font-size:14px;line-height:1.5;color:#5C5548">per assessment in AI cost, after the rescope</p>
+          </div>
+          <div style="background:#FFFFFF;padding:clamp(22px,3vw,30px)">
+            <p style="margin:0;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(40px,4.4vw,54px);line-height:1;letter-spacing:-0.03em;color:#C03D10">40,000</p>
+            <p style="margin:12px 0 0;font-size:14px;line-height:1.5;color:#5C5548">checks, cut to a category-scoped fraction</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-screen-label="Takeaway" style="margin-top:clamp(56px,8vw,92px);background:#181511;border-radius:16px;padding:clamp(32px,5vw,64px)">
+        <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E8632C">Takeaway</p>
+        <p style="margin:22px 0 0;max-width:880px;font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(24px,3.1vw,38px);line-height:1.32;letter-spacing:-0.02em;color:#F4F1EB;text-wrap:pretty">The biggest gains came not from a better model, but from a sharper question: what is the AI actually for, and where does the human belong? That is the pattern I design for in every AI product I build.</p>
+        <div style="margin-top:clamp(30px,4vw,42px);display:flex;flex-wrap:wrap;gap:14px 18px">
+          <a href="mailto:ezequiel.cirilo@gmail.com" style="display:inline-flex;align-items:center;background:#C03D10;color:#FFFFFF;font-size:15.5px;font-weight:600;padding:15px 26px;border-radius:6px;text-decoration:none" style-hover="background:#8F2D0A">Get in touch</a>
+          <a href="../index.html#case-studies" style="display:inline-flex;align-items:center;background:none;border:1px solid rgba(244,241,235,0.28);color:#F4F1EB;font-size:15.5px;font-weight:600;padding:15px 26px;border-radius:6px;text-decoration:none" style-hover="border-color:rgba(244,241,235,0.6)">← Back to all work</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer style="background:#181511;padding:30px clamp(20px,5vw,48px);border-top:1px solid rgba(244,241,235,0.1)">
+    <div style="max-width:1200px;margin:0 auto">
+      <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.04em;color:#A8A199">© 2026 Ezequiel Cirilo</p>
+    </div>
+  </footer>
+  <template id="__bundler_thumbnail" data-bg-color="#181511">
+    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="56" height="56" rx="12" fill="#C03D10"></rect>
+      <path d="M34 50l10 10 18-20" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </template>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { wide: true, mid: true, step: 1, clicking: false, playing: false };
+
+  STEPS = [
+    { hold: 2600, caption: 'The AI suggests, with a confidence score.' },
+    { hold: 3000, caption: 'Declining requires a reason.' },
+    { hold: 3200, caption: 'The reason trains the model — next time it suggests better.' }
+  ];
+
+  advance = () => {
+    const next = this.state.step === 3 ? 1 : this.state.step + 1;
+    if (next !== 1) {
+      this.setState({ clicking: true });
+      this.clickT = setTimeout(() => this.setState({ clicking: false }), 320);
+    }
+    this.setState({ step: next });
+    this.schedule(next);
+  };
+
+  schedule(step) {
+    clearTimeout(this.stepT);
+    if (!this.state.playing) return;
+    this.stepT = setTimeout(this.advance, this.STEPS[step - 1].hold);
+  }
+
+  goTo = (step) => {
+    clearTimeout(this.stepT);
+    this.setState({ step, playing: false, clicking: false });
+  };
+
+  pause = () => { clearTimeout(this.stepT); this.setState({ playing: false }); };
+  resume = () => { this.setState({ playing: true }, () => this.schedule(this.state.step)); };
+  hoverPause = () => { if (this.state.playing) { this.wasPlaying = true; this.pause(); } };
+  hoverResume = () => { if (this.wasPlaying) { this.wasPlaying = false; this.resume(); } };
+  togglePlay = () => { if (this.state.playing) { this.wasPlaying = false; this.pause(); } else this.resume(); };
+  componentDidMount() {
+    this.mqWide = window.matchMedia('(min-width: 1200px)');
+    this.mqMid = window.matchMedia('(min-width: 780px)');
+    this.sync = () => this.setState({ wide: this.mqWide.matches, mid: this.mqMid.matches });
+    this.mqWide.addEventListener('change', this.sync);
+    this.mqMid.addEventListener('change', this.sync);
+    this.sync();
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced) this.startT = setTimeout(this.resume, 900);
+  }
+  componentWillUnmount() {
+    this.mqWide.removeEventListener('change', this.sync);
+    this.mqMid.removeEventListener('change', this.sync);
+    clearTimeout(this.stepT); clearTimeout(this.clickT); clearTimeout(this.startT);
+  }
+  renderVals() {
+    const { wide, mid, step, clicking, playing } = this.state;
+    const dot = (n) => (step === n ? '#C03D10' : '#D8D2C6');
+    const cursor = { 1: ['64%', '82%'], 2: ['76%', '90%'], 3: ['50%', '50%'] }[step];
+    return {
+      s1Vis: step === 1 ? 'visible' : 'hidden',
+      s2Vis: step === 2 ? 'visible' : 'hidden',
+      s3Vis: step === 3 ? 'visible' : 'hidden',
+      s1Op: step === 1 ? 1 : 0,
+      s2Op: step === 2 ? 1 : 0,
+      s3Op: step === 3 ? 1 : 0,
+      r1Border: step >= 2 ? '#E8484B' : '#4A5266',
+      r1Fill: 'transparent',
+      r1Dot: step >= 2 ? 'inset 0 0 0 3px #E8484B' : 'none',
+      cursorLeft: cursor[0],
+      cursorTop: cursor[1],
+      cursorOpacity: step === 3 ? 0 : 1,
+      clickOpacity: clicking ? 0.9 : 0,
+      clickScale: clicking ? 1.6 : 0.4,
+      dot1: dot(1), dot2: dot(2), dot3: dot(3),
+      stepLabel: 'Step ' + step + ' of 3',
+      stepCaption: this.STEPS[step - 1].caption,
+      hoverPause: this.hoverPause,
+      hoverResume: this.hoverResume,
+      togglePlay: this.togglePlay,
+      playLabel: playing ? 'Pause' : 'Play',
+      playGlyph: playing ? '❙❙' : '▶',
+      goStep1: () => this.goTo(1),
+      goStep2: () => this.goTo(2),
+      goStep3: () => this.goTo(3),
+      gridCols: wide ? 'repeat(5, minmax(0,1fr))' : 'minmax(0,1fr)',
+      arrowDisplay: wide ? 'block' : 'none',
+      escCol: wide ? '4 / 5' : '1 / 2',
+      escRow: wide ? '2 / 3' : 'auto',
+      loopCol: wide ? '2 / 6' : '1 / 2',
+      loopRow: wide ? '2 / 4' : 'auto',
+      escOrder: wide ? 0 : 5,
+      humanOrder: wide ? 0 : 6,
+      loopOrder: wide ? 0 : 7,
+      loopSide: wide ? '1px dashed #C03D10' : 'none',
+      loopRadius: wide ? '0 0 12px 12px' : '0',
+      loopMinHeight: wide ? '0px' : '72px',
+      labelLeft: wide ? '50%' : '16px',
+      labelTop: wide ? 'auto' : '6px',
+      labelBottom: wide ? '-9px' : 'auto',
+      labelTransform: wide ? 'translateX(-50%)' : 'none',
+      labelPad: wide ? '0 14px' : '0',
+      splitColumns: mid ? 'minmax(0,1.15fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+      baCols: mid ? 'minmax(0,1fr) 20px minmax(0,1fr)' : 'minmax(0,1fr)',
+      baArrowDisplay: mid ? 'flex' : 'none',
+      beforeCatCols: wide ? 'repeat(5,minmax(0,1fr))' : 'repeat(3,minmax(0,1fr))',
+      extraColDisplay: wide ? 'block' : 'none',
+      extraColFlex: wide ? 'flex' : 'none',
+      afterCatCols: 'repeat(3,minmax(0,1fr))'
+    };
+  }
+}
+
+</script>
+</body>
+</html>
